@@ -1,6 +1,6 @@
 import java.util.Vector;
 
-class Player
+abstract class Player
 {
    protected Paddle paddle;
    //protected Hud hud;

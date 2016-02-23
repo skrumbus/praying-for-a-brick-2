@@ -1,4 +1,4 @@
-class Controller
+abstract class Controller
 {
    protected ControllerStick stick;
    protected ControllerButton[] faceButtons = new ControllerButton[4];
