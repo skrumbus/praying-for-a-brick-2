@@ -7,6 +7,7 @@ class Fight
    protected Size size;
    protected Position position;
    protected Vector<PowerUp> powerUps = new Vector<PowerUp>();
+   protected Menu pauseMenu;
    public Fight(int fightType, int rows, int cols, color[][] colors)
    {
       setPosition(new Position(0, 0) );
@@ -79,16 +80,26 @@ class Fight
       this.fightType = fightType;
       return this;
    }
+   public Menu getMenu()
+   {
+      return pauseMenu;
+   }
+   public Fight setMenu(Menu pauseMenu)
+   {
+      this.pauseMenu = pauseMenu;
+      return this;
+   }
    public Fight draw()
    {
       fill(bgColor);
       rect(getPosition().getX(), getPosition().getY(), getSize().getWidth(), getSize().getHeight() );
-      for(int i = 0; i < teams.size(); i++)
-         teams.elementAt(i).draw();
-      for(int i = 0; i < bricks.size(); i++)
-         bricks.elementAt(i).draw();
-      for(int i = 0; i < powerUps.size(); i++)
-         powerUps.elementAt(i).draw();
+      for(Brick brick : bricks)
+         brick.draw();
+      for(PlayerGroup team : teams)
+         team.draw();
+      for(PowerUp powerUp : powerUps)
+         powerUp.draw();
+      menu.draw();
       return this;
    }
 }
