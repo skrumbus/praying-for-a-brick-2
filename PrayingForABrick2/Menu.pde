@@ -4,7 +4,17 @@ class Menu implements Drawable
    protected ColorSet myColor;
    protected Position position;
    protected Size size;
-   Text title;
+   protected Text title;
+   public JSONObject toJSON()
+   {
+      JSONObject obj = new JSONObject();
+      obj.setString("this", this.getClass().getSimpleName() );
+      obj.setJSONObject("color", getColor().toJSON() );
+      obj.setJSONObject("position", getPosition().toJSON() );
+      obj.setJSONObject("size", getSize().toJSON() );
+      obj.setJSONObject("title", getTitle().toJSON() );
+      return obj;
+   }
    public Vector<MenuItem> getItems()
    {
       return items;

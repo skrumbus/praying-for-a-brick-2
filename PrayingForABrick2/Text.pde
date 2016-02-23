@@ -1,4 +1,4 @@
-class Text implements drawable
+class Text implements Drawable
 {
    protected PFont font;
    protected String text;

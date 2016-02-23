@@ -3,24 +3,23 @@ import java.util.Vector;
 abstract class Player
 {
    protected Paddle paddle;
-   //protected Hud hud;
+   protected Hud hud;
    protected boolean doDrawHud;
-   protected void updateHud()
-   {
-      //hud.update(this);
-   }
    public JSONObject toJSON()
    {
       JSONObject obj = new JSONObject();
       obj.setString("this", this.getClass().getSimpleName() );
       obj.setJSONObject("paddle", getPaddle().toJSON() );
       obj.setBoolean("doDrawHud", getDoDrawHud() );
+      obj.setJSONObject("hud", hud.toJSON() );
       return obj;
    }
    public Player(Paddle paddle,
+                 Hud hud,
                  boolean doDrawHud)
    {
       setPaddle(paddle);
+      setHud(hud);
       setDoDrawHud(doDrawHud);
    }
    public Paddle getPaddle()
@@ -39,6 +38,15 @@ abstract class Player
    public Player setDoDrawHud(boolean doDrawHud)
    {
       this.doDrawHud = doDrawHud;
+      return this;
+   }
+   public Hud getHud()
+   {
+      return hud;
+   }
+   public Player setHud(Hud hud)
+   {
+      this.hud = hud;
       return this;
    }
    public Player draw()

@@ -42,5 +42,5 @@ abstract class Controller
       if(i >= 0 && i < faceButtons.length)
          faceButtons[i] = faceButton;
    }
-   public void update();
+   public abstract void update();
 }

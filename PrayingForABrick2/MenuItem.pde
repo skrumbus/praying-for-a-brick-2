@@ -7,6 +7,17 @@ class MenuItem implements Drawable
    protected Range tickerRange;
    protected Drawable item;
    protected Size size;
+   public MenuItem()
+   {
+      setIsTicker(false);
+      setTickerAmount(0);
+      setPosition(new Position(0, 0) );
+      setColor(new ColorSet()
+                   .setPrimary(color(#000000, 0) )
+                   .setStroke(color(#000000, 0) ) );
+      setTickerRange(new Range(0, 0) );
+      setItem(new DrawableObject() );
+   }
    public Object getItem()
    {
       return item;

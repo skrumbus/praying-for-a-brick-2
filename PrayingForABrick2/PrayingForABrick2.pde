@@ -52,7 +52,7 @@ void setup()
                                                             .setYRange(new Range(0, height / 4) ) )
                                            .setSpacing(5)
                                            .setRows(COLORS_RAINBOW.length)
-                                           .setColumns(COLORS_RAINBOW.length)
+                                           .setColumns(COLORS_RAINBOW.length * 2)
                                            .setColors(reverseColorSettify(COLORS_RAINBOW) );
    bricks = bG.standard();
    println(bricks.size() );
