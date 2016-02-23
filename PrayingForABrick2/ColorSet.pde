@@ -1,13 +1,13 @@
-class ColorSet
+class ColorSet implements Drawable
 {
    protected color primary;
    protected color stroke;
    public JSONObject toJSON()
    {
       JSONObject obj = new JSONObject();
-      obj.setString("this", "ColorSet");
-      obj.setJSONObject("primary", colorToJSON(primary) );
-      obj.setJSONObject("stroke", colorToJSON(stroke) );
+      obj.setString("this", this.getClass().getSimpleName() );
+      obj.setJSONObject("primary", colorToJSON(getPrimary() ) );
+      obj.setJSONObject("stroke", colorToJSON(getStroke() ) );
       return obj;
    }
    protected JSONObject colorToJSON(color c)

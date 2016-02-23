@@ -7,14 +7,14 @@ class ControllerStick extends ControllerButton
    public JSONObject toJSON()
    {
       JSONObject obj = super.toJSON();
-      obj.setString("this", "ControllerStick");
+      obj.setString("this", this.getClass().getSimpleName() );
       obj.setJSONObject("stick", new JSONObject() );
-      obj.setJSONObject("position", position.toJSON() );
-      obj.setJSONObject("xRange", xRange.toJSON() );
-      obj.setJSONObject("yRange", yRange.toJSON() );
+      obj.setJSONObject("position", getPosition().toJSON() );
+      obj.setJSONObject("xRange", getXRange().toJSON() );
+      obj.setJSONObject("yRange", getYRange().toJSON() );
       obj.setJSONArray("engagedDirections", new JSONArray() );
-      for(int i = 0; i < engagedDirections.length; i++)
-         obj.getJSONArray("engagedDirections").setJSONObject(i, engagedDirections[i].toJSON() );
+      for(int i = 0; i < getEngagedDirections().length; i++)
+         obj.getJSONArray("engagedDirections").setJSONObject(i, getEngagedDirections()[i].toJSON() );
       return obj;
    }
    public ControllerStick()

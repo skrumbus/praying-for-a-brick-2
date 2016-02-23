@@ -1,4 +1,4 @@
-class Fight
+class Fight implements Drawable
 {
    protected Vector<PlayerGroup> teams = new Vector<PlayerGroup>();
    protected int fightType;
@@ -44,6 +44,14 @@ class Fight
    {
       return teams;
    }
+   public Vector<Brick> getBricks()
+   {
+     return bricks;
+   }
+   public Vector<PowerUp> getPowerUps()
+   {
+     return powerUps;
+   }
    public Size getSize()
    {
       return size;
@@ -80,26 +88,26 @@ class Fight
       this.fightType = fightType;
       return this;
    }
-   public Menu getMenu()
+   public Menu getPauseMenu()
    {
       return pauseMenu;
    }
-   public Fight setMenu(Menu pauseMenu)
+   public Fight setPauseMenu(Menu pauseMenu)
    {
       this.pauseMenu = pauseMenu;
       return this;
    }
    public Fight draw()
    {
-      fill(bgColor);
+      fill(getBackgroundColor() );
       rect(getPosition().getX(), getPosition().getY(), getSize().getWidth(), getSize().getHeight() );
-      for(Brick brick : bricks)
+      for(Brick brick : getBricks() )
          brick.draw();
-      for(PlayerGroup team : teams)
+      for(PlayerGroup team : getTeams() )
          team.draw();
-      for(PowerUp powerUp : powerUps)
+      for(PowerUp powerUp : getPowerUps() )
          powerUp.draw();
-      menu.draw();
+      getPauseMenu().draw();
       return this;
    }
 }

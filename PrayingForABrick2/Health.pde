@@ -5,9 +5,9 @@ class Health
    public JSONObject toJSON()
    {
       JSONObject obj = new JSONObject();
-      obj.setString("this", "Health");
-      obj.setInt("currentHealth", currentHealth);
-      obj.setInt("maxHealth", maxHealth);
+      obj.setString("this", this.getClass().getSimpleName() );
+      obj.setInt("currentHealth", getCurrentHealth() );
+      obj.setInt("maxHealth", getMaxHealth() );
       return obj;
    }
    public Health()

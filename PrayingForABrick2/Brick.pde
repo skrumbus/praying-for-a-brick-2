@@ -1,4 +1,4 @@
-class Brick extends PhysicalObject
+class Brick extends PhysicalObject implements Drawable
 {
    protected Health health;
    public Brick(MovingPosition position,
@@ -62,8 +62,8 @@ class Brick extends PhysicalObject
    public JSONObject toJSON()
    {
       JSONObject obj = super.toJSON();
-      obj.setString("this","Brick");
-      obj.setJSONObject("health", health.toJSON() );
+      obj.setString("this",this.getClass().getSimpleName() );
+      obj.setJSONObject("health", getHealth().toJSON() );
       return obj;
    }
    public Brick setColor(ColorSet myColor)
@@ -84,6 +84,11 @@ class Brick extends PhysicalObject
    public Brick setSize(Size size)
    {
       super.setSize(size);
+      return this;
+   }
+   public Brick draw()
+   {
+      super.draw();
       return this;
    }
 }

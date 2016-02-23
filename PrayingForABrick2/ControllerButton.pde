@@ -5,7 +5,7 @@ class ControllerButton
    public JSONObject toJSON()
    {
       JSONObject obj = new JSONObject();
-      obj.setString("this", "ControllerButton");
+      obj.setString("this", this.getClass().getSimpleName() );
       obj.setBoolean("isTapped", getIsTapped() );
       obj.setBoolean("isHeld", getIsHeld() );
       return obj;

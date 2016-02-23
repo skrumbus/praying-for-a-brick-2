@@ -1,4 +1,4 @@
-class Hud extends Menu
+class Hud extends Menu implements Drawable
 {
    protected Health health;
 }

@@ -42,7 +42,7 @@ final color[] COLORS_RAINBOW = {
   #8B64FF
 };
 final color[] shades = {};
-
+boolean doDraw = false;
 Vector<Brick> bricks = new Vector<Brick>();
 void setup()
 {
@@ -51,14 +51,16 @@ void setup()
    bricks = bG.standard(new MovingPosition(0,0)
                             .setXRange(new Range(0, width))
                             .setYRange(new Range(0, height / 4)),
-                        5,
-                        COLORS_RAINBOW.length,
-                        10,
+                        5, //spacing between bricks
+                        COLORS_RAINBOW.length, //rows
+                        10, //columns
                         TwoDeeifyIntegerArray(COLORS_RAINBOW, 10) );
    println(bricks.size() );
+   println(bricks.elementAt(0).toJSON().toString());
 }
 void draw()
 {
+   size(600,600);
    background(0);
    drawBricks(bricks);
 }

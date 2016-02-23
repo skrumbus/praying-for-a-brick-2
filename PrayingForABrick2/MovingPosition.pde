@@ -7,7 +7,7 @@ class MovingPosition extends Position
    public JSONObject toJSON()
    {
       JSONObject obj = new JSONObject();
-      obj.setString("this", "MovingPosition");
+      obj.setString("this", this.getClass().getSimpleName() );
       obj.setJSONObject("x", new JSONObject() );
       obj.getJSONObject("x").setFloat("x", getX() );
       obj.getJSONObject("x").setFloat("delta", getDeltaX() );
@@ -141,11 +141,11 @@ class MovingPosition extends Position
       this.speedRange = speedRange;
       return setSpeed(getSpeed() );
    }
-   public float getNewSpeed(float deltaX, float deltaY)
+   protected float getNewSpeed(float deltaX, float deltaY)
    {
       return sqrt(pow(deltaX, 2) + pow(deltaY, 2) );
    }
-   public float getMultiplier(float deltaX, float deltaY)
+   protected float getMultiplier(float deltaX, float deltaY)
    {
       if (getSpeedRange().getMax() == 0 || (deltaY == 0 && deltaX == 0) )
          return 0;

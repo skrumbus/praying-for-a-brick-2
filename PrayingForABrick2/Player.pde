@@ -12,7 +12,7 @@ abstract class Player
    public JSONObject toJSON()
    {
       JSONObject obj = new JSONObject();
-      obj.setString("this", "Player");
+      obj.setString("this", this.getClass().getSimpleName() );
       obj.setJSONObject("paddle", getPaddle().toJSON() );
       obj.setBoolean("doDrawHud", getDoDrawHud() );
       return obj;

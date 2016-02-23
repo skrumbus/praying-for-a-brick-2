@@ -4,7 +4,7 @@ class Position
    public JSONObject toJSON()
    {
       JSONObject obj = new JSONObject();
-      obj.setString("this", "Position");
+      obj.setString("this", this.getClass().getSimpleName() );
       obj.setFloat("x", getX() );
       obj.setFloat("y", getY() );
       return obj;

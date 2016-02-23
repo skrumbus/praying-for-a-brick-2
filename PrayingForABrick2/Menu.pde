@@ -1,13 +1,13 @@
-class Menu
+class Menu implements Drawable
 {
-   protected Vector<MenuItem> menuItems;
+   protected Vector<MenuItem> items;
    protected ColorSet myColor;
    protected Position position;
    protected Size size;
    Text title;
-   public Vector<MenuItem> getMenuItems()
+   public Vector<MenuItem> getItems()
    {
-      return menuItems;
+      return items;
    }
    public ColorSet getColor()
    {
@@ -59,7 +59,8 @@ class Menu
    {
       getColor().draw();
       rect(getPosition().getX(), getPosition().getY(), getSize().getWidth(), getSize().getHeight() );
-      for(MenuItem item : menuItems)
+      getTitle().draw();
+      for(MenuItem item : getItems() )
          item.draw();
       return this;
    }

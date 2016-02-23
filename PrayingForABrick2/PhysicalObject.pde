@@ -1,4 +1,4 @@
-class PhysicalObject
+class PhysicalObject implements Drawable
 {
    protected MovingPosition position;
    protected Size size;
@@ -7,7 +7,7 @@ class PhysicalObject
    public JSONObject toJSON()
    {
       JSONObject obj = new JSONObject();
-      obj.setString("this", "PhysicalObject");
+      obj.setString("this", this.getClass().getSimpleName() );
       obj.setJSONObject("position", getPosition().toJSON() );
       obj.setJSONObject("size", getSize().toJSON() );
       obj.setJSONObject("color", getColor().toJSON() );
@@ -93,9 +93,9 @@ class PhysicalObject
          this.type = 0;
       return this;
    }
-   public void draw()
+   public PhysicalObject draw()
    {
-      myColor.draw();
+      getColor().draw();
       switch(getType() )
       {
          case OBJECT_RECT:
@@ -105,5 +105,6 @@ class PhysicalObject
             ellipse(getPosition().getX(), getPosition().getY(), getSize().getWidth(), getSize().getHeight() );
             break;
       }
+      return this;
    }
 }

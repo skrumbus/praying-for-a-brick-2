@@ -4,7 +4,7 @@ class Range
    public JSONObject toJSON()
    {
       JSONObject obj = new JSONObject();
-      obj.setString("this", "Range");
+      obj.setString("this", this.getClass().getSimpleName() );
       obj.setFloat("min", getMin() );
       obj.setFloat("max", getMax() );
       return obj;

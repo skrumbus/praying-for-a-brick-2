@@ -6,7 +6,7 @@ class PowerUp extends PhysicalObject
    public JSONObject toJSON()
    {
       JSONObject obj = super.toJSON();
-      obj.setString("this", "PowerUp");
+      obj.setString("this", this.getClass().getSimpleName() );
       obj.setJSONObject("powerUpInfo", new JSONObject() );
       obj.getJSONObject("powerUpInfo").setInt("type", getPowerUpType() );
       obj.getJSONObject("powerUpInfo").setInt("state", getState() );
@@ -30,7 +30,7 @@ class PowerUp extends PhysicalObject
    {
       return powerUpType;
    }
-   public void setPowerUpType(int powerUpType)
+   public PowerUp setPowerUpType(int powerUpType)
    {
       if( (powerUpType != POWERUP_WIDE) && //Powerups
           (powerUpType != POWERUP_SLOW) &&
@@ -49,27 +49,30 @@ class PowerUp extends PhysicalObject
           (powerUpType != POWERDOWN_SHORT) )
          powerUpType = 0;
       this.powerUpType = powerUpType;
+      return this;
    }
    public int getState()
    {
       return state;
    }
-   public void setState(int state)
+   public PowerUp setState(int state)
    {
       if( (state != POWERUPSTATE_ACTIVE) &&
           (state != POWERUPSTATE_FREE) &&
           (state != POWERUPSTATE_AVAILABLE) )
          state = 0;
       this.state = state;
+      return this;
    }
    public int getCount()
    {
       return count;
    }
-   public void setCount(int count)
+   public PowerUp setCount(int count)
    {
       if(count < 1)
          count = 1;
       this.count = count;
+      return this;
    }
 }

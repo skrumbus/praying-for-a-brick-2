@@ -4,7 +4,7 @@ class Size
    public JSONObject toJSON()
    {
       JSONObject obj = new JSONObject();
-      obj.setString("this", "Size");
+      obj.setString("this", this.getClass().getSimpleName() );
       obj.setFloat("width", getWidth() );
       obj.setFloat("height", getHeight() );
       return obj;
