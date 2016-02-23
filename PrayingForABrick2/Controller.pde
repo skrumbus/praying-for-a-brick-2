@@ -2,6 +2,16 @@ abstract class Controller
 {
    protected ControllerStick stick;
    protected ControllerButton[] faceButtons = new ControllerButton[4];
+   public JSONObject toJSON()
+   {
+      JSONObject obj = new JSONObject();
+      obj.setString("this", this.getClass().getSimpleName() );
+      obj.setJSONObject("stick", getStick().toJSON() );
+      obj.setJSONArray("faceButtons", new JSONArray() );
+      for(int i = 0; i < faceButtons.length; i++)
+         obj.getJSONArray("faceButtons").setJSONObject(i, getFaceButtons()[i].toJSON() );
+      return obj;
+   }
    public ControllerStick getStick()
    {
       return stick;
@@ -32,8 +42,5 @@ abstract class Controller
       if(i >= 0 && i < faceButtons.length)
          faceButtons[i] = faceButton;
    }
-   public void update()
-   {
-      
-   }
+   public void update();
 }

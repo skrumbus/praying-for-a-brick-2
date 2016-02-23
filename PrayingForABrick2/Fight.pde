@@ -8,6 +8,26 @@ class Fight implements Drawable
    protected Position position;
    protected Vector<PowerUp> powerUps = new Vector<PowerUp>();
    protected Menu pauseMenu;
+   public JSONObject toJSON()
+   {
+      JSONObject obj = new JSONObject();
+      obj.setString("this", this.getClass().getSimpleName() );
+      obj.setInt("fightType", getFightType() );
+      obj.setInt("bgColor", getBackgroundColor() );
+      obj.setJSONObject("size", getSize().toJSON() );
+      obj.setJSONObject("position", getPosition().toJSON() );
+      obj.setJSONObject("pauseMenu", getPauseMenu().toJSON() );
+      obj.setJSONArray("teams", new JSONArray() );
+      obj.setJSONArray("bricks", new JSONArray() );
+      obj.setJSONArray("powerUps", new JSONArray() );
+      for(int i = 0; i < getTeams().size(); i++)
+         obj.getJSONArray("teams").setJSONObject(i, getTeams().elementAt(i).toJSON() );
+      for(int i = 0; i < getBricks().size(); i++)
+         obj.getJSONArray("bricks").setJSONObject(i, getBricks().elementAt(i).toJSON() );
+      for(int i = 0; i < getPowerUps().size(); i++)
+         obj.getJSONArray("powerUps").setJSONObject(i, getPowerUps().elementAt(i).toJSON() );
+      return obj;
+   }
    public Fight(int fightType, BrickGenerator gen)
    {
       setPosition(new Position(0, 0) );
