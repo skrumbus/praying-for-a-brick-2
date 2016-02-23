@@ -3,7 +3,7 @@ class ControllerStick extends ControllerButton
    protected Position position;
    protected Range xRange, yRange;
    protected ControllerButton[] engagedDirections = new ControllerButton[4];
-   float threshold;
+   protected float threshold;
    public JSONObject toJSON()
    {
       JSONObject obj = super.toJSON();

@@ -35,7 +35,7 @@ class BrickGenerator
       }
       return bricks;
    }
-   int mapToArray(int i, Range range, int l)
+   protected int mapToArray(int i, Range range, int l)
    {
       return (int) constrain(map(i, range.getMin(), range.getMax(), 0, l), 0, l);
    }

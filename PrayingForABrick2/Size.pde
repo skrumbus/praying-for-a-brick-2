@@ -1,8 +1,6 @@
-import java.awt.geom.Rectangle2D;
-
 class Size
 {
-   float w, h;
+   protected float w, h;
    public JSONObject toJSON()
    {
       JSONObject obj = new JSONObject();
