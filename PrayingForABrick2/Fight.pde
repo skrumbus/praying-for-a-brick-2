@@ -8,27 +8,21 @@ class Fight implements Drawable
    protected Position position;
    protected Vector<PowerUp> powerUps = new Vector<PowerUp>();
    protected Menu pauseMenu;
-   public Fight(int fightType, int rows, int cols, color[][] colors)
+   public Fight(int fightType, BrickGenerator gen)
    {
       setPosition(new Position(0, 0) );
       setSize(new Size(width, height) );
       setBackgroundColor(color(#000000, 255) );
       setFightType(fightType);
-      setupBricks(rows, cols, colors);
+      setupBricks(gen);
    }
-   protected void setupBricks(int rows, int cols, color[][] colors)
+   protected void setupBricks(BrickGenerator gen)
    {
       BrickGenerator bG = new BrickGenerator();
       switch(fightType)
       {
          case FIGHTTYPE_STANDARD:
-            bricks = bG.standard(new MovingPosition(getPosition().getX(), position.getY() )
-                                     .setXRange(new Range(getPosition().getX(), getPosition().getX() + getSize().getWidth() ) )
-                                     .setYRange(new Range(getPosition().getY(), getPosition().getY() + getSize().getHeight() ) ),
-                                 BRICK_SPACING,
-                                 rows, cols,
-                                 colors
-                                );
+            bricks = bG.standard();
             break;
       }
    }

@@ -1,37 +1,87 @@
 class BrickGenerator
 {
-   public Vector<Brick> standard(MovingPosition position, float spacing, int rows, int cols, color[][] colors)
+   protected float spacing;
+   protected int rows, cols;
+   protected ColorSet[][] colors;
+   MovingPosition position;
+   public float getSpacing()
    {
-      Size size = new Size(position.getXRange().getTotal() / cols - spacing, position.getYRange().getTotal() / rows - spacing);
-      float xOffset = position.getXRange().getMin() + spacing / 2;
-      float yOffset = position.getYRange().getMin() + spacing / 2;
-      position.setDeltaX(size.getWidth() + spacing);
-      position.setDeltaY(size.getHeight() + spacing);
-      position.setX(xOffset);
-      position.setY(yOffset);
+      return spacing;
+   }
+   public BrickGenerator setSpacing(float spacing)
+   {
+      if(spacing < 0)
+         spacing = 0;
+      this.spacing = spacing;
+      return this;
+   }
+   public int getRows()
+   {
+      return rows;
+   }
+   public BrickGenerator setRows(int rows)
+   {
+      if(rows <= 0)
+         rows = 1;
+      this.rows = rows;
+      return this;
+   }
+   public int getColumns()
+   {
+      return cols;
+   }
+   public BrickGenerator setColumns(int cols)
+   {
+      if(cols <= 0)
+         cols = 1;
+      this.cols = cols;
+      return this;
+   }
+   public MovingPosition getPosition()
+   {
+      return position;
+   }
+   public BrickGenerator setPosition(MovingPosition position)
+   {
+      this.position = position;
+      return this;
+   }
+   public ColorSet[][] getColors()
+   {
+      return colors;
+   }
+   public BrickGenerator setColors(ColorSet[][] colors)
+   {
+      this.colors = colors;
+      return this;
+   }
+   public Vector<Brick> standard()
+   {
+      Size size = new Size(getPosition().getXRange().getTotal() / getColumns() - getSpacing(), getPosition().getYRange().getTotal() / getRows() - getSpacing() );
+      float xOffset = getPosition().getXRange().getMin() + getSpacing() / 2;
+      float yOffset = getPosition().getYRange().getMin() + getSpacing() / 2;
+      getPosition().setDeltaX(size.getWidth() + getSpacing() );
+      getPosition().setDeltaY(size.getHeight() + getSpacing() );
+      getPosition().setX(xOffset);
+      getPosition().setY(yOffset);
       Vector<Brick> bricks = new Vector<Brick>();
-      println("rows" + rows);
-      println("columns" + cols);
-      for(int i = 0; i < rows; i++)
+      for(int i = 0; i < getRows(); i++)
       {
          for(int j = 0; j < cols; j++)
          {
-            MovingPosition p = new MovingPosition(position.getX(), position.getY() );
-            int iIndex = mapToArray(i, new Range(0, rows - 1), colors.length - 1);
-            int jIndex = mapToArray(j, new Range(0, rows - 1), colors[iIndex].length - 1);
+            MovingPosition p = new MovingPosition(getPosition().getX(), getPosition().getY() );
+            int iIndex = mapToArray(i, new Range(0, getRows() - 1), getColors().length - 1);
+            int jIndex = mapToArray(j, new Range(0, getColumns() - 1), getColors()[iIndex].length - 1);
             Brick brick = new Brick()
                               .setPosition(p)
                               .setSize(size)
-                              .setColor(new ColorSet()
-                                            .setPrimary(colors[iIndex][jIndex])
-                                            .setStroke(color(#FFFFFF, 0) ) 
-                                       )
+                              .setColor(getColors()[iIndex][jIndex])
                               .setHealth(new Health(1) );
             bricks.add(brick);
-            position.advance(true, false);
+            getPosition().advance(true, false);
          }
-         position.setX(xOffset);
-         position.advance(false, true);
+         getPosition().setX(xOffset);
+         getPosition().advance(false, true);
       }
       return bricks;
    }

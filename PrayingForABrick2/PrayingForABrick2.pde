@@ -47,14 +47,14 @@ Vector<Brick> bricks = new Vector<Brick>();
 void setup()
 {
    size(600,600);
-   BrickGenerator bG = new BrickGenerator();
-   bricks = bG.standard(new MovingPosition(0,0)
-                            .setXRange(new Range(0, width))
-                            .setYRange(new Range(0, height / 4)),
-                        5, //spacing between bricks
-                        COLORS_RAINBOW.length, //rows
-                        10, //columns
-                        TwoDeeifyIntegerArray(COLORS_RAINBOW, 10) );
+   BrickGenerator bG = new BrickGenerator().setPosition(new MovingPosition(0,0)
+                                                            .setXRange(new Range(0, width) )
+                                                            .setYRange(new Range(0, height / 4) ) )
+                                           .setSpacing(5)
+                                           .setRows(COLORS_RAINBOW.length)
+                                           .setColumns(10)
+                                           .setColors(reverseColorSettify(COLORS_RAINBOW) );
+   bricks = bG.standard();
    println(bricks.size() );
    println(bricks.elementAt(0).toJSON().toString());
 }
@@ -67,10 +67,7 @@ void draw()
 void drawBricks(Vector<Brick> bricks)
 {
    for(int i = 0; i < bricks.size(); i++)
-   {
       bricks.elementAt(i).draw();
-      //println(bricks.elementAt(i).toJSON() );
-   }
 }
 int[][] TwoDeeifyIntegerArray(int[] ints, int l)
 {
@@ -79,9 +76,20 @@ int[][] TwoDeeifyIntegerArray(int[] ints, int l)
    {
       newInts[i] = new int[l];
       for(int j = 0; j < newInts[i].length; j++)
-      {
          newInts[i][j] = ints[i];
-      }
    }
    return newInts;
+}
+ColorSet[][] reverseColorSettify(color[] colors)
+{
+   ColorSet[][] set = new ColorSet[colors.length][];
+   for(int i = 0; i < set.length; i++)
+   {
+      set[i] = new ColorSet[colors.length];
+      for(int j = 0; j < set[i].length; j++)
+         set[i][j] = new ColorSet()
+                      .setPrimary(colors[i])
+                      .setStroke(colors[(i + j) % colors.length]);
+   }
+   return set;
 }
