@@ -1,5 +1,9 @@
 class ControllerStick extends ControllerButton
 {
+   public final int STICK_UP = 0;
+   public final int STICK_RIGHT = 1;
+   public final int STICK_DOWN = 2;
+   public final int STICK_LEFT = 3;
    protected Position position;
    protected Range xRange, yRange;
    protected ControllerButton[] engagedDirections = new ControllerButton[4];
@@ -54,16 +58,16 @@ class ControllerStick extends ControllerButton
    {
       switch(index)
       {
-         case RECT_TOP:
+         case STICK_UP:
             return ( (getPosition().getY() > getYRange().getMiddle() + (getThreshold() * getYRange().getTotal() ) && (getYRange().getMax() > getYRange().getMin() ) ) ||
                      (getPosition().getY() < getYRange().getMiddle() + (getThreshold() * getYRange().getTotal() ) && (getYRange().getMax() < getYRange().getMin() ) ) );
-         case RECT_BOTTOM:
+         case STICK_DOWN:
             return ( (getPosition().getY() < getYRange().getMiddle() + (getThreshold() * getYRange().getTotal() ) && (getYRange().getMin() < getYRange().getMax() ) ) ||
                      (getPosition().getY() > getYRange().getMiddle() + (getThreshold() * getYRange().getTotal() ) && (getYRange().getMin() > getYRange().getMax() ) ) );
-         case RECT_LEFT:
+         case STICK_LEFT:
             return ( (getPosition().getX() < getXRange().getMiddle() + (getThreshold() * getXRange().getTotal() ) && (getXRange().getMin() < getXRange().getMax() ) ) ||
                      (getPosition().getX() > getXRange().getMiddle() + (getThreshold() * getXRange().getTotal() ) && (getXRange().getMin() > getXRange().getMax() ) ) );
-         case RECT_RIGHT:
+         case STICK_RIGHT:
             return ( (getPosition().getX() > getXRange().getMiddle() + (getThreshold() * getXRange().getTotal() ) && (getXRange().getMax() > getXRange().getMin() ) ) ||
                      (getPosition().getX() < getXRange().getMiddle() + (getThreshold() * getXRange().getTotal() ) && (getXRange().getMax() < getXRange().getMin() ) ) );
          default:

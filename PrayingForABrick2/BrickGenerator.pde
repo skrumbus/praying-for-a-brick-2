@@ -4,6 +4,14 @@ class BrickGenerator
    protected int rows, cols;
    protected ColorSet[][] colors;
    MovingPosition position;
+   public BrickGenerator()
+   {
+      setSpacing(0);
+      setRows(0);
+      setColumns(0);
+      setColors(new ColorSet[0][0]);
+      setPosition(new MovingPosition(0,0) );
+   }
    public float getSpacing()
    {
       return spacing;

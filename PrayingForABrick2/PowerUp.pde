@@ -1,5 +1,25 @@
 class PowerUp extends PhysicalObject
 {
+   public final int POWERUP_CATCH = 1;
+   public final int POWERUP_INVINCIBILITY = 2;
+   public final int POWERUP_WIDEPADDLE = 3;
+   public final int POWERUP_SLOWBALL = 4;
+   public final int POWERUP_FASTPADDLE = 5;
+   public final int POWERUP_LASER = 6;
+   public final int POWERUP_LINEBREAK = 7;
+   public final int POWERUP_DOUBLE = 8;
+   public final int POWERUP_STRONGBALL = 9;
+   public final int POWERUP_LASERSHIELD = 10;
+   
+   public final int POWERDOWN_SHORTPADDLE = -1;
+   public final int POWERDOWN_SLOWPADDLE = -2;
+   public final int POWERDOWN_FASTBALL = -3;
+   public final int POWERDOWN_WEAKBALL = -4;
+
+   public final int POWERUPSTATE_FREE = 1;
+   public final int POWERUPSTATE_AVAILABLE = 2;
+   public final int POWERUPSTATE_ACTIVE = 3;
+
    protected int powerUpType;
    protected int state;
    protected int count;
@@ -32,21 +52,21 @@ class PowerUp extends PhysicalObject
    }
    public PowerUp setPowerUpType(int powerUpType)
    {
-      if( (powerUpType != POWERUP_WIDE) && //Powerups
-          (powerUpType != POWERUP_SLOW) &&
-          (powerUpType != POWERUP_FAST) &&
+      if( (powerUpType != POWERUP_WIDEPADDLE) && //Powerups
+          (powerUpType != POWERUP_SLOWBALL) &&
+          (powerUpType != POWERUP_FASTPADDLE) &&
           (powerUpType != POWERUP_DOUBLE) &&
           (powerUpType != POWERUP_CATCH) &&
           (powerUpType != POWERUP_INVINCIBILITY) &&
-          (powerUpType != POWERUP_LINE) && 
+          (powerUpType != POWERUP_LINEBREAK) && 
           (powerUpType != POWERUP_LASER) &&
           (powerUpType != POWERUP_STRONGBALL) &&
           (powerUpType != POWERUP_LASERSHIELD) &&
           
-          (powerUpType != POWERDOWN_FAST) && //Powerdowns
-          (powerUpType != POWERDOWN_SLOW) &&
+          (powerUpType != POWERDOWN_FASTBALL) && //Powerdowns
+          (powerUpType != POWERDOWN_SLOWPADDLE) &&
           (powerUpType != POWERDOWN_WEAKBALL) &&
-          (powerUpType != POWERDOWN_SHORT) )
+          (powerUpType != POWERDOWN_SHORTPADDLE) )
          powerUpType = 0;
       this.powerUpType = powerUpType;
       return this;

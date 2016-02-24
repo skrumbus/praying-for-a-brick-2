@@ -1,5 +1,7 @@
 class Brick extends PhysicalObject implements Drawable
 {
+   public final float BRICK_SPACING = 5;
+   public final float BRICK_MINALPHA = .25;
    protected Health health;
    public Brick(MovingPosition position,
                 Size size,
@@ -19,10 +21,12 @@ class Brick extends PhysicalObject implements Drawable
                                green(myColor.getPrimary() ), 
                                blue(myColor.getPrimary() ), 
                                getAppropriateAlpha() ) );
+      setColor(myColor);
    }
    public Brick(Position position,
                 Size size,
-                ColorSet myColor)
+                ColorSet myColor,
+                Health health)
    {
       super(position,
             size,
@@ -37,6 +41,7 @@ class Brick extends PhysicalObject implements Drawable
                                green(myColor.getPrimary() ), 
                                blue(myColor.getPrimary() ), 
                                getAppropriateAlpha() ) );
+      setColor(myColor);
    }
    public Brick()
    {
@@ -84,6 +89,10 @@ class Brick extends PhysicalObject implements Drawable
    public Brick setSize(Size size)
    {
       super.setSize(size);
+      return this;
+   }
+   public Brick update()
+   {
       return this;
    }
    public Brick draw()

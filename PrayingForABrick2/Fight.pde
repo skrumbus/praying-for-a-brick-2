@@ -1,5 +1,7 @@
 class Fight implements Drawable
 {
+   public final int FIGHTTYPE_STANDARD = 1;
+   
    protected Vector<PlayerGroup> teams = new Vector<PlayerGroup>();
    protected int fightType;
    protected color bgColor;
