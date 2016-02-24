@@ -1,4 +1,4 @@
-class Range
+class Range implements JSONifiable
 {
    protected float min, max;
    public JSONObject toJSON()
@@ -9,9 +9,13 @@ class Range
       obj.setFloat("max", getMax() );
       return obj;
    }
+   public Range fromJSON(JSONObject obj)
+   {
+      return this;
+   }
    public Range()
    {
-      setRange(Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY);
+      setRange(0, 0);
    }
    public Range(float min, float max)
    {

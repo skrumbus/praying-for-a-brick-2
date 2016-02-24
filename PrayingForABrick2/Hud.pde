@@ -1,4 +1,4 @@
-class Hud extends Menu implements Drawable
+class Hud extends Menu implements Drawable, JSONifiable
 {
    protected Health health;
    public JSONObject toJSON()
@@ -6,6 +6,10 @@ class Hud extends Menu implements Drawable
       JSONObject obj = super.toJSON();
       obj.setJSONObject("health", getHealth().toJSON() );
       return obj;
+   }
+   public Hud fromJSON(JSONObject obj)
+   {
+      return this;
    }
    public Health getHealth()
    {

@@ -1,4 +1,4 @@
-class ControllerButton
+class ControllerButton implements JSONifiable
 {
    protected boolean isTapped;
    protected boolean isHeld;
@@ -9,6 +9,10 @@ class ControllerButton
       obj.setBoolean("isTapped", getIsTapped() );
       obj.setBoolean("isHeld", getIsHeld() );
       return obj;
+   }
+   public ControllerButton fromJSON(JSONObject obj)
+   {
+      return this;
    }
    public ControllerButton()
    {

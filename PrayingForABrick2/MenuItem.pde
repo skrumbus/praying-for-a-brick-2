@@ -1,12 +1,31 @@
-class MenuItem implements Drawable
+class MenuItem implements Drawable, JSONifiable
 {
    protected Position position;
-   protected ColorSet myColor;
+   protected ColorSet mainColor, highlightColor;
    protected boolean isTicker;
    protected int tickerAmount;
    protected Range tickerRange;
    protected Drawable item;
    protected Size size;
+   public JSONObject toJSON()
+   {
+      JSONObject obj = new JSONObject();
+      obj.setString("this", this.getClass().getSimpleName() );
+      obj.setBoolean("isTicker", getIsTicker() );
+      obj.setInt("tickerAmount", getTickerAmount() );
+      obj.setJSONObject("tickerRange", getTickerRange().toJSON() );
+      obj.setJSONObject("position", getPosition().toJSON() );
+      obj.setJSONObject("mainColor", getColor().toJSON() );
+      obj.setJSONObject("highlightColor", getHighlight().toJSON() );
+      if(item instanceof JSONifiable)
+         obj.setJSONObject("item", ( (JSONifiable)getItem() ).toJSON() );
+      obj.setJSONObject("size", getSize().toJSON() );
+      return obj;
+   }
+   public MenuItem fromJSON(JSONObject obj)
+   {
+      return this;
+   }
    public MenuItem()
    {
       setIsTicker(false);
@@ -16,7 +35,7 @@ class MenuItem implements Drawable
                    .setPrimary(color(#000000, 0) )
                    .setStroke(color(#000000, 0) ) );
       setTickerRange(new Range(0, 0) );
-      setItem(new DrawableObject() );
+      setItem(new PhysicalObject() );
    }
    public Object getItem()
    {
@@ -47,11 +66,20 @@ class MenuItem implements Drawable
    }
    public ColorSet getColor()
    {
-      return myColor;
+      return mainColor;
    }
-   public MenuItem setColor(ColorSet myColor)
+   public MenuItem setColor(ColorSet mainColor)
    {
-      this.myColor = myColor;
+      this.mainColor = mainColor;
+      return this;
+   }
+   public ColorSet getHighlight()
+   {
+      return highlightColor;
+   }
+   public MenuItem setHighlight(ColorSet highlightColor)
+   {
+      this.highlightColor = highlightColor;
       return this;
    }
    public boolean getIsTicker()

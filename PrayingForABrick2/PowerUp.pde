@@ -1,4 +1,4 @@
-class PowerUp extends PhysicalObject
+class PowerUp extends PhysicalObject implements JSONifiable
 {
    public final int POWERUP_CATCH = 1;
    public final int POWERUP_INVINCIBILITY = 2;
@@ -32,6 +32,10 @@ class PowerUp extends PhysicalObject
       obj.getJSONObject("powerUpInfo").setInt("state", getState() );
       obj.getJSONObject("powerUpInfo").setInt("count", count);
       return obj;
+   }
+   public PowerUp fromJSON(JSONObject obj)
+   {
+      return this;
    }
    public PowerUp(MovingPosition position,
                   float r,

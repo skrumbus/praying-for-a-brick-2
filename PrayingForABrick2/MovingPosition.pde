@@ -1,4 +1,4 @@
-class MovingPosition extends Position
+class MovingPosition extends Position implements JSONifiable
 {
    protected float speed;
    protected Range speedRange;
@@ -20,6 +20,10 @@ class MovingPosition extends Position
       obj.getJSONObject("speed").setFloat("speed", getSpeed() );
       obj.getJSONObject("speed").setJSONObject("range", getSpeedRange().toJSON() );
       return obj;
+   }
+   public MovingPosition fromJSON(JSONObject obj)
+   {
+      return this;
    }
    public MovingPosition()
    {

@@ -1,4 +1,4 @@
-class Brick extends PhysicalObject implements Drawable
+class Brick extends PhysicalObject implements Drawable, JSONifiable
 {
    public final float BRICK_SPACING = 5;
    public final float BRICK_MINALPHA = .25;
@@ -70,6 +70,10 @@ class Brick extends PhysicalObject implements Drawable
       obj.setString("this",this.getClass().getSimpleName() );
       obj.setJSONObject("health", getHealth().toJSON() );
       return obj;
+   }
+   public Brick fromJSON(JSONObject obj)
+   {
+      return this;
    }
    public Brick setColor(ColorSet myColor)
    {

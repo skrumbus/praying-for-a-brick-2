@@ -1,4 +1,6 @@
-class Menu implements Drawable
+import java.util.Vector;
+
+class Menu implements Drawable, JSONifiable
 {
    protected Vector<MenuItem> items;
    protected ColorSet myColor;
@@ -13,7 +15,14 @@ class Menu implements Drawable
       obj.setJSONObject("position", getPosition().toJSON() );
       obj.setJSONObject("size", getSize().toJSON() );
       obj.setJSONObject("title", getTitle().toJSON() );
+      obj.setJSONArray("items", new JSONArray() );
+      for(int i = 0; i < getItems().size(); i++)
+         obj.getJSONArray("items").setJSONObject(i,  getItems().elementAt(i).toJSON() );
       return obj;
+   }
+   public Menu fromJSON(JSONObject obj)
+   {
+      return this;
    }
    public Vector<MenuItem> getItems()
    {
@@ -55,12 +64,12 @@ class Menu implements Drawable
       this.title = title;
       return this;
    }
-   public Menu fixItemPositions(Boolean isVertical)
+   public Menu distributePositions(Boolean isVertical)
    {
       //evenly distribute menuItems across menu
       return this;
    }
-   public Menu fixItemPositions() //assuming a vertical menu
+   public Menu distributePositions() //assuming a vertical menu
    {
       //evenly distribute menuItems across menu
       return this;

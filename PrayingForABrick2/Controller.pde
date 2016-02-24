@@ -1,4 +1,4 @@
-abstract class Controller
+abstract class Controller implements JSONifiable
 {
    protected ControllerStick stick;
    protected ControllerButton[] faceButtons = new ControllerButton[4];
@@ -11,6 +11,10 @@ abstract class Controller
       for(int i = 0; i < faceButtons.length; i++)
          obj.getJSONArray("faceButtons").setJSONObject(i, getFaceButtons()[i].toJSON() );
       return obj;
+   }
+   public Controller fromJSON(JSONObject obj)
+   {
+      return this;
    }
    public ControllerStick getStick()
    {

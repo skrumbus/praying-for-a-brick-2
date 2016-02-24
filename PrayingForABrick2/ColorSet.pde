@@ -1,4 +1,4 @@
-class ColorSet implements Drawable
+class ColorSet implements Drawable, JSONifiable
 {
    protected color primary;
    protected color stroke;
@@ -19,6 +19,10 @@ class ColorSet implements Drawable
       obj.setInt("blue", (int) blue(c) );
       obj.setInt("alpha", (int) alpha(c) );
       return obj;
+   }
+   public ColorSet fromJSON(JSONObject obj)
+   {
+      return this;
    }
    public ColorSet()
    {

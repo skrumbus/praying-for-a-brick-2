@@ -1,4 +1,4 @@
-class Health
+class Health implements JSONifiable
 {
    protected int currentHealth;
    protected int maxHealth;
@@ -9,6 +9,10 @@ class Health
       obj.setInt("currentHealth", getCurrentHealth() );
       obj.setInt("maxHealth", getMaxHealth() );
       return obj;
+   }
+   public Health fromJSON(JSONObject obj)
+   {
+      return this;
    }
    public Health()
    {

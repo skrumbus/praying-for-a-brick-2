@@ -1,4 +1,6 @@
-class PlayerGroup
+import java.util.Vector;
+
+class PlayerGroup implements JSONifiable
 {
    protected Vector<Ball> balls = new Vector<Ball>();
    protected Vector<Integer> holdingBalls = new Vector<Integer>();
@@ -17,6 +19,10 @@ class PlayerGroup
       for(int i = 0; i < getPlayers().size(); i++)
          obj.getJSONArray("players").setJSONObject(i, getPlayers().elementAt(i).toJSON() );
       return obj;
+   }
+   public PlayerGroup fromJSON(JSONObject obj)
+   {
+      return this;
    }
    public Vector<Player> getPlayers()
    {

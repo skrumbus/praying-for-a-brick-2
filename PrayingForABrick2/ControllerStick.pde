@@ -1,4 +1,4 @@
-class ControllerStick extends ControllerButton
+class ControllerStick extends ControllerButton implements JSONifiable
 {
    public final int STICK_UP = 0;
    public final int STICK_RIGHT = 1;
@@ -20,6 +20,10 @@ class ControllerStick extends ControllerButton
       for(int i = 0; i < getEngagedDirections().length; i++)
          obj.getJSONArray("engagedDirections").setJSONObject(i, getEngagedDirections()[i].toJSON() );
       return obj;
+   }
+   public ControllerButton fromJSON(JSONObject obj)
+   {
+      return this;
    }
    public ControllerStick()
    {

@@ -1,4 +1,4 @@
-class Text implements Drawable
+class Text implements Drawable, JSONifiable
 {
    protected PFont font;
    protected String text;
@@ -20,6 +20,10 @@ class Text implements Drawable
       obj.setString("name", getFont().getName() );
       obj.setInt("size", getFont().getSize() );
       return obj;
+   }
+   public Text fromJSON(JSONObject obj)
+   {
+      return this;
    }
    public PFont getFont()
    {
@@ -65,4 +69,3 @@ class Text implements Drawable
       return this;
    }
 }
-

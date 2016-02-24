@@ -1,6 +1,6 @@
 import java.util.Vector;
 
-abstract class Player
+abstract class Player implements JSONifiable
 {
    protected Paddle paddle;
    protected Hud hud;
@@ -13,6 +13,10 @@ abstract class Player
       obj.setBoolean("doDrawHud", getDoDrawHud() );
       obj.setJSONObject("hud", hud.toJSON() );
       return obj;
+   }
+   public Player fromJSON(JSONObject obj)
+   {
+      return this;
    }
    public Player(Paddle paddle,
                  Hud hud,

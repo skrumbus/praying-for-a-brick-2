@@ -1,4 +1,4 @@
-class Ball extends PhysicalObject implements Drawable
+class Ball extends PhysicalObject implements Drawable, JSONifiable
 {
    protected boolean[] doDie = new boolean[4];
    public Ball()
@@ -72,7 +72,11 @@ class Ball extends PhysicalObject implements Drawable
       for(int i = 0; i < getDoDie().length; i++)
          obj.getJSONArray("doDie").setBoolean(i, getDoDie()[i]);
       return obj;
-   }
+      }
+      public Ball fromJSON(JSONObject obj)
+      {
+         return this;
+      }
    public Ball draw()
    {
       super.draw();

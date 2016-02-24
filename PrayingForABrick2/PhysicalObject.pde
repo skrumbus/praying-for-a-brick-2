@@ -1,4 +1,4 @@
-class PhysicalObject implements Drawable
+class PhysicalObject implements Drawable, JSONifiable
 {
    protected MovingPosition position;
    protected Size size;
@@ -13,6 +13,10 @@ class PhysicalObject implements Drawable
       obj.setJSONObject("color", getColor().toJSON() );
       obj.setInt("type", getType() );
       return obj;
+   }
+   public PhysicalObject fromJSON(JSONObject obj)
+   {
+      return this;
    }
    public PhysicalObject()
    {

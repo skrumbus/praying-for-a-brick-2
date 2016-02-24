@@ -1,4 +1,4 @@
-class Paddle extends PhysicalObject implements Drawable
+class Paddle extends PhysicalObject implements Drawable, JSONifiable
 {
    protected int top;
    public JSONObject toJSON()
@@ -7,6 +7,10 @@ class Paddle extends PhysicalObject implements Drawable
       obj.setString("this", this.getClass().getSimpleName() );
       obj.setInt("top", getTop() );
       return obj;
+   }
+   public Paddle fromJSON(JSONObject obj)
+   {
+      return this;
    }
    Paddle()
    {

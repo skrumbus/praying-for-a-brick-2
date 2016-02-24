@@ -1,5 +1,3 @@
-
-
 final color[] COLORS_RAINBOW = {
   #FF6464,
   #FF7F64,
@@ -11,9 +9,7 @@ final color[] COLORS_RAINBOW = {
 };
 
 final color[] shades = {};
-
-
-
+int flipper = 0;
 boolean doDraw = false;
 Vector<Brick> bricks = new Vector<Brick>();
 void setup()
@@ -29,12 +25,26 @@ void setup()
    bricks = bG.standard();
    println(bricks.size() );
    println(bricks.elementAt(0).toJSON().toString());
-   frame.setResizable(true);
+   surface.setResizable(true);
 }
 void draw()
 {
    background(0);
    drawBricks(bricks);
+   flipFlop();
+}
+void flipFlop()
+{
+   if (flipper == 0)
+   {
+      surface.setSize(1000,1000);
+      flipper = 1;
+   }
+   else
+   {
+     surface.setSize(600,600);
+     flipper = 0;
+   }
 }
 void drawBricks(Vector<Brick> bricks)
 {

@@ -1,4 +1,4 @@
-class Size
+class Size implements JSONifiable
 {
    protected float w, h;
    public JSONObject toJSON()
@@ -8,6 +8,10 @@ class Size
       obj.setFloat("width", getWidth() );
       obj.setFloat("height", getHeight() );
       return obj;
+   }
+   public Size fromJSON(JSONObject obj)
+   {
+      return this;
    }
    public Size()
    {

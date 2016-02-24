@@ -1,4 +1,6 @@
-class Fight implements Drawable
+import java.util.Vector;
+
+class Fight implements Drawable, JSONifiable
 {
    public final int FIGHTTYPE_STANDARD = 1;
    
@@ -29,6 +31,10 @@ class Fight implements Drawable
       for(int i = 0; i < getPowerUps().size(); i++)
          obj.getJSONArray("powerUps").setJSONObject(i, getPowerUps().elementAt(i).toJSON() );
       return obj;
+   }
+   public Fight fromJSON(JSONObject obj)
+   {
+      return this;
    }
    public Fight(int fightType, BrickGenerator gen)
    {

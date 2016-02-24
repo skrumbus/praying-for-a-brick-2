@@ -1,4 +1,4 @@
-class Position
+class Position implements JSONifiable
 {
    protected float x, y;
    public JSONObject toJSON()
@@ -8,6 +8,10 @@ class Position
       obj.setFloat("x", getX() );
       obj.setFloat("y", getY() );
       return obj;
+   }
+   public Position fromJSON(JSONObject obj)
+   {
+      return this;
    }
    public Position()
    {
