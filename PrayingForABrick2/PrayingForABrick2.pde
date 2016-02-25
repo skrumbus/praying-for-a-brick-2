@@ -7,11 +7,16 @@ final color[] COLORS_RAINBOW = {
   #4B6482,
   #8B64FF
 };
-
-final color[] shades = {};
-int flipper = 0;
-boolean doDraw = false;
+final color[] shades = {
+  #000000,
+  #323232,
+  #969696,
+  #E1E1E1,
+  #FFFFFF
+};
+float maxSpeed = 6;
 Vector<Brick> bricks = new Vector<Brick>();
+HumanPlayer player;
 void setup()
 {
    size(600,600);
@@ -23,6 +28,23 @@ void setup()
                                            .setColumns(COLORS_RAINBOW.length * 2)
                                            .setColors(reverseColorSettify(COLORS_RAINBOW, COLORS_RAINBOW.length, COLORS_RAINBOW.length * 2 ));
    bricks = bG.standard();
+   float pHeight = height / 16;
+   float pWidth = width / 4;
+   player = new HumanPlayer()
+                .setPaddle(new Paddle()
+                               .setTop(DirectionConstants.DIRECTION_UP) 
+                               .setPosition(new MovingPosition(width / 2 - pWidth / 2, height - pHeight * 1.5)
+                                                .setXRange(new Range(0, width) )
+                                                .setYRange(new Range(0, height) )
+                                                .setSpeedRange(new Range(0, maxSpeed) )
+                                                .setSpeed(maxSpeed / 2)
+                                                .setDeltas(0, 0)
+                                             )
+                               .setSize(new Size(pWidth, pHeight) )
+                               .setColor(new ColorSet(color(shades[1]) ) ) )
+                .setHud(new Hud())
+                .setIsXLocked(false)
+                .setIsYLocked(false);
    println(bricks.size() );
    println(bricks.elementAt(0).toJSON().toString());
    surface.setResizable(true);
@@ -31,20 +53,7 @@ void draw()
 {
    background(0);
    drawBricks(bricks);
-   flipFlop();
-}
-void flipFlop()
-{
-   if (flipper == 0)
-   {
-      surface.setSize(1000,1000);
-      flipper = 1;
-   }
-   else
-   {
-     surface.setSize(600,600);
-     flipper = 0;
-   }
+   player.draw();
 }
 void drawBricks(Vector<Brick> bricks)
 {

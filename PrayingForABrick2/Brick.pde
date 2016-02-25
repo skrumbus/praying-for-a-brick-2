@@ -1,4 +1,4 @@
-class Brick extends PhysicalObject implements Drawable, JSONifiable
+class Brick extends PhysicalObject implements Drawable, JSONifiable, ShapeConstants
 {
    public final float BRICK_SPACING = 5;
    public final float BRICK_MINALPHA = .25;
@@ -11,7 +11,7 @@ class Brick extends PhysicalObject implements Drawable, JSONifiable
       super(position,
             size,
             myColor,
-            OBJECT_RECT);
+            SHAPE_RECT);
       setHealth(health);
       myColor.setPrimary(color(red(myColor.getPrimary() ), 
                                green(myColor.getPrimary() ), 
@@ -31,7 +31,7 @@ class Brick extends PhysicalObject implements Drawable, JSONifiable
       super(position,
             size,
             myColor,
-            OBJECT_RECT);
+            SHAPE_RECT);
       setHealth(health);
       myColor.setPrimary(color(red(myColor.getPrimary() ), 
                                green(myColor.getPrimary() ), 
@@ -45,7 +45,7 @@ class Brick extends PhysicalObject implements Drawable, JSONifiable
    }
    public Brick()
    {
-      super(OBJECT_RECT);
+      super(SHAPE_RECT);
       setHealth(new Health(0) );
    }
    public Health getHealth()

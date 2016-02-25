@@ -1,4 +1,4 @@
-class PhysicalObject implements Drawable, JSONifiable
+class PhysicalObject implements Drawable, JSONifiable, ShapeConstants
 {
    protected MovingPosition position;
    protected Size size;
@@ -90,8 +90,8 @@ class PhysicalObject implements Drawable, JSONifiable
    }
    public PhysicalObject setType(int type)
    {
-      if( (type == OBJECT_ELLIPSE) ||
-          (type == OBJECT_RECT) )
+      if( (type == SHAPE_ELLIPSE) ||
+          (type == SHAPE_RECT) )
          this.type = type;
       else
          this.type = 0;
@@ -102,10 +102,10 @@ class PhysicalObject implements Drawable, JSONifiable
       getColor().draw();
       switch(getType() )
       {
-         case OBJECT_RECT:
+         case SHAPE_RECT:
             rect(getPosition().getX(), getPosition().getY(), getSize().getWidth(), getSize().getHeight() );
             break;
-         case OBJECT_ELLIPSE:
+         case SHAPE_ELLIPSE:
             ellipse(getPosition().getX(), getPosition().getY(), getSize().getWidth(), getSize().getHeight() );
             break;
       }

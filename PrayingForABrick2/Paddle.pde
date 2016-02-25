@@ -1,4 +1,4 @@
-class Paddle extends PhysicalObject implements Drawable, JSONifiable
+class Paddle extends PhysicalObject implements Drawable, JSONifiable, DirectionConstants, ShapeConstants
 {
    protected int top;
    public JSONObject toJSON()
@@ -14,8 +14,8 @@ class Paddle extends PhysicalObject implements Drawable, JSONifiable
    }
    Paddle()
    {
-      super(OBJECT_RECT);
-      setTop(RECT_TOP);
+      super(SHAPE_RECT);
+      setTop(DIRECTION_UP);
    }
    Paddle(MovingPosition position,
           Size size,
@@ -25,7 +25,7 @@ class Paddle extends PhysicalObject implements Drawable, JSONifiable
       super(position,
             size,
             myColor,
-            OBJECT_RECT);
+            SHAPE_RECT);
             setTop(top);
    }
    Paddle(MovingPosition position,
@@ -35,21 +35,37 @@ class Paddle extends PhysicalObject implements Drawable, JSONifiable
       super(position,
             size,
             myColor,
-            OBJECT_RECT);
-            setTop(RECT_TOP);
+            SHAPE_RECT);
+            setTop(DIRECTION_UP);
    }
    public int getTop()
    {
       return top;
    }
-   public void setTop(int top)
+   public Paddle setTop(int top)
    {
-      if( (top != RECT_TOP) &&
-          (top != RECT_BOTTOM) &&
-          (top != RECT_LEFT) &&
-          (top != RECT_RIGHT) )
-         top = RECT_TOP;
+      if( (top != DIRECTION_UP) &&
+          (top != DIRECTION_DOWN) &&
+          (top != DIRECTION_LEFT) &&
+          (top != DIRECTION_RIGHT) )
+         top = DIRECTION_UP;
       this.top = top;
+      return this;
+   }
+   public Paddle setSize(Size size)
+   {
+      super.setSize(size);
+      return this;
+   }
+   public Paddle setPosition(MovingPosition position)
+   {
+      super.setPosition(position);
+      return this;
+   }
+   public Paddle setColor(ColorSet myColor)
+   {
+      super.setColor(myColor);
+      return this;
    }
    public Paddle draw()
    {

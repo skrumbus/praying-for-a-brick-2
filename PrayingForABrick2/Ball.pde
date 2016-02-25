@@ -1,9 +1,9 @@
-class Ball extends PhysicalObject implements Drawable, JSONifiable
+class Ball extends PhysicalObject implements Drawable, JSONifiable, ShapeConstants 
 {
    protected boolean[] doDie = new boolean[4];
    public Ball()
    {
-      super(OBJECT_ELLIPSE);
+      super(SHAPE_ELLIPSE);
    }
    public Ball(MovingPosition position,
                float r,
@@ -13,7 +13,7 @@ class Ball extends PhysicalObject implements Drawable, JSONifiable
       super(position,
             new Size(r * 2, r * 2),
             myColor,
-            OBJECT_ELLIPSE);
+            SHAPE_ELLIPSE);
       setDoDie(doDie);
          
    }

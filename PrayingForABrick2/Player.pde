@@ -5,6 +5,13 @@ abstract class Player implements JSONifiable
    protected Paddle paddle;
    protected Hud hud;
    protected boolean doDrawHud;
+   boolean isYLocked, isXLocked;
+   public Player()
+   {
+      setPaddle(new Paddle() );
+      setHud(new Hud() );
+      setDoDrawHud(true);
+   }
    public JSONObject toJSON()
    {
       JSONObject obj = new JSONObject();
@@ -53,6 +60,25 @@ abstract class Player implements JSONifiable
       this.hud = hud;
       return this;
    }
+   public boolean getIsYLocked()
+   {
+      return isYLocked;
+   }
+   public Player setIsYLocked(boolean isYLocked)
+   {
+      this.isYLocked = isYLocked;
+      return this;
+   }
+   public boolean getIsXLocked()
+   {
+      return isXLocked;
+   }
+   public Player setIsXLocked(boolean isXLocked)
+   {
+      this.isXLocked = isXLocked;
+      return this;
+   }
+   public abstract Player update();
    public Player draw()
    {
       //getHud().update(this);

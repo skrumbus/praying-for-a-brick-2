@@ -1,4 +1,4 @@
-class PowerUp extends PhysicalObject implements JSONifiable
+class PowerUp extends PhysicalObject implements JSONifiable, ShapeConstants
 {
    public final int POWERUP_CATCH = 1;
    public final int POWERUP_INVINCIBILITY = 2;
@@ -46,7 +46,7 @@ class PowerUp extends PhysicalObject implements JSONifiable
       super(position,
             new Size(r * 2, r * 2),
             myColor,
-            OBJECT_ELLIPSE);
+            SHAPE_ELLIPSE);
       setPowerUpType(powerUpType);
       setState(state);
    }
