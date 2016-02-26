@@ -41,8 +41,6 @@ void setup()
                                    .setPort(getLastPort() )
                                );
    //surface.setResizable(true);
-   println(player.getController().toJSON() );
-   println(alpha(player.getPaddle().getColor().getPrimary() ) );
 }
 void draw()
 {

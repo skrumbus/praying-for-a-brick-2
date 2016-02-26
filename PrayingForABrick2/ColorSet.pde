@@ -59,8 +59,14 @@ class ColorSet implements Drawable, JSONifiable
    }
    public ColorSet draw()
    {
-      stroke(stroke);
-      fill(primary);
+      if(alpha(getStroke() ) == 0)
+         noStroke();
+      else
+         stroke(getStroke() );
+      if(alpha(getPrimary() ) == 0)
+         noFill();
+      else
+         fill(getPrimary() );
       return this;
    }
 }
