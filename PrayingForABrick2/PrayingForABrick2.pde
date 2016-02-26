@@ -15,8 +15,8 @@ void setup()
                                                                           ColorConstants.COLORS_RAINBOW.length,
                                                                           ColorConstants.COLORS_RAINBOW.length * 2 ) );
    bricks = bG.standard();
-   float pHeight = height / 16;
-   float pWidth = width / 4;
+   float pHeight = height / 32;
+   float pWidth = width / 6;
    player = new HumanPlayer()
                 .setPaddle(new Paddle()
                                .setTop(DirectionConstants.DIRECTION_UP) 
