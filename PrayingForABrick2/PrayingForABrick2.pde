@@ -21,10 +21,9 @@ void setup()
                 .setPaddle(new Paddle()
                                .setTop(DirectionConstants.DIRECTION_UP) 
                                .setPosition(new MovingPosition(width / 2 - pWidth / 2, height - pHeight * 1.5)
-                                                .setXRange(new Range(0, width) )
-                                                .setYRange(new Range(0, height) )
+                                                .setXRange(new Range(0, width - pWidth) )
+                                                .setYRange(new Range(0, height - pHeight) )
                                                 .setSpeedRange(new Range(0, maxSpeed) )
-                                                .setSpeed(maxSpeed / 2)
                                                 .setDeltas(0, 0)
                                            )
                                .setSize(new Size(pWidth, pHeight) )
@@ -36,12 +35,11 @@ void setup()
                                    .setStick(new ControllerStick()
                                                  .setXRange(new Range(0, 1023) )
                                                  .setYRange(new Range(0, 1023) )
+                                                 .setThreshold(.75)
                                             )
                                    .setPort(getLastPort() )
                                );
-   println(bricks.size() );
-   println(bricks.elementAt(0).toJSON().toString());
-   surface.setResizable(true);
+   //surface.setResizable(true);
 }
 void draw()
 {

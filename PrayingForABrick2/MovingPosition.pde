@@ -1,6 +1,5 @@
 class MovingPosition extends Position implements JSONifiable
 {
-   protected float speed;
    protected Range speedRange;
    protected float deltaX, deltaY;
    protected Range xRange, yRange;
@@ -16,9 +15,7 @@ class MovingPosition extends Position implements JSONifiable
       obj.getJSONObject("y").setFloat("y", getY() );
       obj.getJSONObject("y").setFloat("delta", getDeltaY() );
       obj.getJSONObject("y").setJSONObject("range", getYRange().toJSON() );
-      obj.setJSONObject("speed", new JSONObject() );
-      obj.getJSONObject("speed").setFloat("speed", getSpeed() );
-      obj.getJSONObject("speed").setJSONObject("range", getSpeedRange().toJSON() );
+      obj.setJSONObject("speedRange", getSpeedRange().toJSON() );
       return obj;
    }
    public MovingPosition fromJSON(JSONObject obj)
@@ -28,7 +25,6 @@ class MovingPosition extends Position implements JSONifiable
    public MovingPosition()
    {
       setSpeedRange(new Range(0, 0) );
-      setSpeed(0);
       setDeltas(0, 0);
       setXRange(new Range(0, 0) );
       setYRange(new Range(0, 0) );
@@ -38,7 +34,6 @@ class MovingPosition extends Position implements JSONifiable
    public MovingPosition(float x, float y)
    {
       setSpeedRange(new Range(0, 0) );
-      setSpeed(0);
       setDeltas(0, 0);
       setXRange(new Range(x, x) );
       setYRange(new Range(y, y) );
@@ -47,12 +42,10 @@ class MovingPosition extends Position implements JSONifiable
    }
    public MovingPosition(float x, float y,
                          Range xRange, Range yRange,
-                         float speed, 
                          Range speedRange,
                          float deltaX, float deltaY)
    {
       setSpeedRange(speedRange);
-      setSpeed(speed);
       setDeltas(deltaX, deltaY);
       setXRange(xRange);
       setYRange(yRange);
@@ -123,19 +116,6 @@ class MovingPosition extends Position implements JSONifiable
       setDeltaY(deltaY * multiplier);
       return this;
    }
-   public float getSpeed()
-   {
-      return speed;
-   }
-   public MovingPosition setSpeed(float speed)
-   {
-      if(speed < getSpeedRange().getMin() )
-         speed = getSpeedRange().getMin();
-      else if(speed > getSpeedRange().getMax() )
-         speed = getSpeedRange().getMax();
-      this.speed = speed;
-      return this;
-   }
    public Range getSpeedRange()
    {
       return speedRange;
@@ -143,7 +123,11 @@ class MovingPosition extends Position implements JSONifiable
    public MovingPosition setSpeedRange(Range speedRange)
    {
       this.speedRange = speedRange;
-      return setSpeed(getSpeed() );
+      return this;
+   }
+   public float getCurrentSpeed()
+   {
+      return sqrt(pow(deltaX, 2) + pow(deltaY, 2) );
    }
    protected float getNewSpeed(float deltaX, float deltaY)
    {
@@ -154,7 +138,7 @@ class MovingPosition extends Position implements JSONifiable
       if (getSpeedRange().getMax() == 0 || (deltaY == 0 && deltaX == 0) )
          return 0;
       else
-         return getSpeed() / getNewSpeed(deltaX, deltaY);
+         return getCurrentSpeed() / getNewSpeed(deltaX, deltaY);
    }
    public MovingPosition advance()
    {

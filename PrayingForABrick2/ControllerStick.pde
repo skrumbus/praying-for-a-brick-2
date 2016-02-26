@@ -29,7 +29,7 @@ class ControllerStick extends ControllerButton implements JSONifiable, Direction
       setYRange(new Range(0, 0) );
       for(int i = 0; i < engagedDirections.length; i++)
          setEngagedDirection(new ControllerButton(getIsDirectionEngaged(i) ), i);
-      setThreshold(0);
+      setThreshold(.75);
    }
    public ControllerStick(Position position,
                    Range xRange, Range yRange)
@@ -59,17 +59,13 @@ class ControllerStick extends ControllerButton implements JSONifiable, Direction
       switch(index)
       {
          case DIRECTION_UP:
-            return ( (getPosition().getY() > getYRange().getMiddle() + (getThreshold() * getYRange().getTotal() ) && (getYRange().getMax() > getYRange().getMin() ) ) ||
-                     (getPosition().getY() < getYRange().getMiddle() + (getThreshold() * getYRange().getTotal() ) && (getYRange().getMax() < getYRange().getMin() ) ) );
+            return (getPosition().getY() > getYRange().getMiddle() + (getThreshold() * (getYRange().getTotal() / 2) ) );
          case DIRECTION_DOWN:
-            return ( (getPosition().getY() < getYRange().getMiddle() + (getThreshold() * getYRange().getTotal() ) && (getYRange().getMin() < getYRange().getMax() ) ) ||
-                     (getPosition().getY() > getYRange().getMiddle() + (getThreshold() * getYRange().getTotal() ) && (getYRange().getMin() > getYRange().getMax() ) ) );
+            return (getPosition().getY() < getYRange().getMiddle() - (getThreshold() * (getYRange().getTotal() / 2) ) );
          case DIRECTION_LEFT:
-            return ( (getPosition().getX() < getXRange().getMiddle() + (getThreshold() * getXRange().getTotal() ) && (getXRange().getMin() < getXRange().getMax() ) ) ||
-                     (getPosition().getX() > getXRange().getMiddle() + (getThreshold() * getXRange().getTotal() ) && (getXRange().getMin() > getXRange().getMax() ) ) );
+            return (getPosition().getX() < getXRange().getMiddle() - (getThreshold() * (getXRange().getTotal() / 2) ) );
          case DIRECTION_RIGHT:
-            return ( (getPosition().getX() > getXRange().getMiddle() + (getThreshold() * getXRange().getTotal() ) && (getXRange().getMax() > getXRange().getMin() ) ) ||
-                     (getPosition().getX() < getXRange().getMiddle() + (getThreshold() * getXRange().getTotal() ) && (getXRange().getMax() < getXRange().getMin() ) ) );
+            return (getPosition().getX() > getXRange().getMiddle() + (getThreshold() * (getXRange().getTotal() / 2) ) );
          default:
             return false;
       }
@@ -150,8 +146,11 @@ class ControllerStick extends ControllerButton implements JSONifiable, Direction
    {
       super.update(pressed);
       setPosition(position);
-      for(int i = 0; i < engagedDirections.length; i++)
-         engagedDirections[i].update(pressed);
+      engagedDirections[DIRECTION_UP].update(getIsDirectionEngaged(DIRECTION_UP) );
+      engagedDirections[DIRECTION_DOWN].update(getIsDirectionEngaged(DIRECTION_DOWN) );
+      engagedDirections[DIRECTION_LEFT].update(getIsDirectionEngaged(DIRECTION_LEFT) );
+      engagedDirections[DIRECTION_RIGHT].update(getIsDirectionEngaged(DIRECTION_RIGHT) );
+      println(toJSON().toString() );
       return this;
    }
 }

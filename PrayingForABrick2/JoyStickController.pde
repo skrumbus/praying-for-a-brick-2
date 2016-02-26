@@ -23,7 +23,6 @@ class JoyStickController extends Controller implements JoyStickControllerConstan
       if(getPort().available() > 0)
       {
          String input = getPort().readStringUntil('\n');
-         println(input);
          if(input != null)
             state = int(split(input, JOYSTICKCONTROLLER_DELIMITER) );
       }

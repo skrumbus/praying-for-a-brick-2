@@ -49,36 +49,36 @@ class HumanPlayer extends Player implements JSONifiable
    protected float getPaddleIncrement(boolean isX)
    {
       if (isX)
-         return map(getController().getStick().getPosition().getY(),
+         return map(getController().getStick().getPosition().getX(),
                     getController().getStick().getXRange().getMin(),
                     getController().getStick().getXRange().getMax(),
-                    getPaddle().getPosition().getSpeed() * -1, 
-                    getPaddle().getPosition().getSpeed() );
+                    getPaddle().getPosition().getSpeedRange().getMax() * -1, 
+                    getPaddle().getPosition().getSpeedRange().getMax() );
       else
+      {
          return map(getController().getStick().getPosition().getY(),
-                    getController().getStick().getYRange().getMin(),
                     getController().getStick().getYRange().getMax(),
-                    getPaddle().getPosition().getSpeed() * -1, 
-                    getPaddle().getPosition().getSpeed() );
-   }
-   protected float getAppropriateSpeed(float xIncrement, float yIncrement)
-   {
-      return sqrt(pow(xIncrement, 2) + pow(yIncrement, 2));
+                    getController().getStick().getYRange().getMin(),
+                    getPaddle().getPosition().getSpeedRange().getMax() * -1, 
+                    getPaddle().getPosition().getSpeedRange().getMax() );
+      }
    }
    public HumanPlayer update()
    {
-      float xIncrement;
-      float yIncrement;
+      int xIncrement;
+      int yIncrement;
       controller.update();
       if(isXLocked)
          xIncrement = 0;
       else
-         xIncrement = getPaddleIncrement(true);
+         xIncrement = (int) getPaddleIncrement(true);
       if(isYLocked)
          yIncrement = 0;
       else
-         yIncrement = getPaddleIncrement(false);
-      getPaddle().getPosition().setSpeed(getAppropriateSpeed(xIncrement, yIncrement) ).setDeltas(xIncrement, yIncrement);
+         yIncrement = (int) getPaddleIncrement(false);
+      getPaddle().getPosition().setDeltas(xIncrement, yIncrement);
+      getPaddle().getPosition().setX(getPaddle().getPosition().getX() + xIncrement);
+      getPaddle().getPosition().setY(getPaddle().getPosition().getY() + yIncrement);
       return this;
    }
    
