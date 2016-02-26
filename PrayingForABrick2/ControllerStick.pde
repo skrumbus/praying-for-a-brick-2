@@ -9,15 +9,15 @@ class ControllerStick extends ControllerButton implements JSONifiable, Direction
       JSONObject obj = super.toJSON();
       obj.setString("this", this.getClass().getSimpleName() );
       obj.setJSONObject("stick", new JSONObject() );
-      obj.setJSONObject("position", getPosition().toJSON() );
-      obj.setJSONObject("xRange", getXRange().toJSON() );
-      obj.setJSONObject("yRange", getYRange().toJSON() );
-      obj.setJSONArray("engagedDirections", new JSONArray() );
+      obj.getJSONObject("stick").setJSONObject("position", getPosition().toJSON() );
+      obj.getJSONObject("stick").setJSONObject("xRange", getXRange().toJSON() );
+      obj.getJSONObject("stick").setJSONObject("yRange", getYRange().toJSON() );
+      obj.getJSONObject("stick").setJSONArray("engagedDirections", new JSONArray() );
       for(int i = 0; i < getEngagedDirections().length; i++)
-         obj.getJSONArray("engagedDirections").setJSONObject(i, getEngagedDirections()[i].toJSON() );
+         obj.getJSONObject("stick").getJSONArray("engagedDirections").setJSONObject(i, getEngagedDirections()[i].toJSON() );
       return obj;
    }
-   public ControllerButton fromJSON(JSONObject obj)
+   public ControllerStick fromJSON(JSONObject obj)
    {
       return this;
    }

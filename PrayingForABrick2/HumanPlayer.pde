@@ -69,6 +69,7 @@ class HumanPlayer extends Player implements JSONifiable
    {
       float xIncrement;
       float yIncrement;
+      controller.update();
       if(isXLocked)
          xIncrement = 0;
       else

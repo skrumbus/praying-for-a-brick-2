@@ -1,3 +1,4 @@
+
 float maxSpeed = 6;
 Vector<Brick> bricks = new Vector<Brick>();
 HumanPlayer player;
@@ -30,7 +31,14 @@ void setup()
                                .setColor(new ColorSet(color(ColorConstants.COLORS_SHADES[1]) ) ) )
                 .setHud(new Hud())
                 .setIsXLocked(false)
-                .setIsYLocked(false);
+                .setIsYLocked(false)
+                .setController(new JoyStickController()
+                                   .setStick(new ControllerStick()
+                                                 .setXRange(new Range(0, 1023) )
+                                                 .setYRange(new Range(0, 1023) )
+                                            )
+                                   .setPort(getLastPort() )
+                               );
    println(bricks.size() );
    println(bricks.elementAt(0).toJSON().toString());
    surface.setResizable(true);
@@ -39,7 +47,32 @@ void draw()
 {
    background(0);
    drawBricks(bricks);
+   player.update();
    player.draw();
+}
+Serial getLastPort()
+{
+   String[] ports = Serial.list();
+   String OS = System.getProperty("os.name").toLowerCase();
+   if(ports.length > 0)
+      if(OS.indexOf("win") >= 0)
+         return new Serial(this, ports[ports.length - 1], 250000);
+      else if(OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0)
+      {
+         boolean found = false;
+         int i = 0;
+         for(; i < ports.length && !found; i++)
+         {
+            println(ports[i]);
+            if(ports[i].indexOf("/dev/ttyACM") >=0)
+               found = true;
+         }
+         return new Serial(this, ports[i], 250000);  
+      }
+      else
+         return null;
+   else
+      return null;
 }
 void drawBricks(Vector<Brick> bricks)
 {
