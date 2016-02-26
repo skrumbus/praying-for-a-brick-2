@@ -27,8 +27,8 @@ class ControllerStick extends ControllerButton implements JSONifiable, Direction
       setPosition(new Position(0, 0) );
       setXRange(new Range(0, 0) );
       setYRange(new Range(0, 0) );
-      for(int i = 0; i < engagedDirections.length; i++)
-         setEngagedDirection(new ControllerButton(getIsDirectionEngaged(i) ), i);
+      for(int i = 0; i < getEngagedDirections().length; i++)
+         getEngagedDirections()[i] = new ControllerButton(getIsDirectionEngaged(i) );
       setThreshold(.75);
    }
    public ControllerStick(Position position,
@@ -38,8 +38,8 @@ class ControllerStick extends ControllerButton implements JSONifiable, Direction
       setPosition(position);
       setXRange(xRange);
       setYRange(yRange);
-      for(int i = 0; i < engagedDirections.length; i++)
-         setEngagedDirection(new ControllerButton(getIsDirectionEngaged(i) ), i);
+      for(int i = 0; i < getEngagedDirections().length; i++)
+         getEngagedDirections()[i] = new ControllerButton(getIsDirectionEngaged(i) );
       setThreshold(.75);
    }
    public ControllerStick(Position position,
@@ -50,8 +50,8 @@ class ControllerStick extends ControllerButton implements JSONifiable, Direction
       setPosition(position);
       setXRange(xRange);
       setYRange(yRange);
-      for(int i = 0; i < engagedDirections.length; i++)
-         setEngagedDirection(new ControllerButton(getIsDirectionEngaged(i) ), i);
+      for(int i = 0; i < getEngagedDirections().length; i++)
+         getEngagedDirections()[i] = new ControllerButton(getIsDirectionEngaged(i) );
       setThreshold(threshold);
    }
    protected boolean getIsDirectionEngaged(int index)
@@ -116,19 +116,6 @@ class ControllerStick extends ControllerButton implements JSONifiable, Direction
             this.engagedDirections[i] = engagedDirections[i];
       return this;
    }
-   public ControllerButton getEngagedDirection(int index)
-   {
-      if(index < 0 || index >= engagedDirections.length)
-         return null;
-      else
-         return engagedDirections[index];
-   }
-   public ControllerStick setEngagedDirection(ControllerButton engaged, int index)
-   {
-      if(index >= 0 && index < this.engagedDirections.length)
-         this.engagedDirections[index] = engaged;
-      return this;
-   }
    public float getThreshold()
    {
       return threshold;
@@ -150,7 +137,6 @@ class ControllerStick extends ControllerButton implements JSONifiable, Direction
       engagedDirections[DIRECTION_DOWN].update(getIsDirectionEngaged(DIRECTION_DOWN) );
       engagedDirections[DIRECTION_LEFT].update(getIsDirectionEngaged(DIRECTION_LEFT) );
       engagedDirections[DIRECTION_RIGHT].update(getIsDirectionEngaged(DIRECTION_RIGHT) );
-      println(toJSON().toString() );
       return this;
    }
 }

@@ -27,7 +27,7 @@ void setup()
                                                 .setDeltas(0, 0)
                                            )
                                .setSize(new Size(pWidth, pHeight) )
-                               .setColor(new ColorSet(color(ColorConstants.COLORS_SHADES[1]) ) ) )
+                               .setColor(new ColorSet(color(ColorConstants.COLORS_SHADES[1], 160) ) ) )
                 .setHud(new Hud())
                 .setIsXLocked(false)
                 .setIsYLocked(false)
@@ -36,10 +36,12 @@ void setup()
                                                  .setXRange(new Range(0, 1023) )
                                                  .setYRange(new Range(0, 1023) )
                                                  .setThreshold(.75)
+                                                 .setPosition(new Position(511, 511))
                                             )
                                    .setPort(getLastPort() )
                                );
    //surface.setResizable(true);
+   println(player.getController().toJSON() );
 }
 void draw()
 {

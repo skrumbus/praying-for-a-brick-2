@@ -108,10 +108,8 @@ class MovingPosition extends Position implements JSONifiable
    }
    public MovingPosition setDeltas(float deltaX, float deltaY)
    {
-      float multiplier;
-      setDeltaX(deltaX);
-      setDeltaY(deltaY);
-      multiplier = getMultiplier(deltaX, deltaY);
+      float multiplier = getMultiplier(deltaX, deltaY);
+      println(multiplier);
       setDeltaX(deltaX * multiplier);
       setDeltaY(deltaY * multiplier);
       return this;
@@ -138,7 +136,7 @@ class MovingPosition extends Position implements JSONifiable
       if (getSpeedRange().getMax() == 0 || (deltaY == 0 && deltaX == 0) )
          return 0;
       else
-         return getCurrentSpeed() / getNewSpeed(deltaX, deltaY);
+         return getSpeedRange().getMax() / getNewSpeed(deltaX, deltaY);
    }
    public MovingPosition advance()
    {
