@@ -109,7 +109,6 @@ class MovingPosition extends Position implements JSONifiable
    public MovingPosition setDeltas(float deltaX, float deltaY)
    {
       float multiplier = getMultiplier(deltaX, deltaY);
-      println(multiplier);
       setDeltaX(deltaX * multiplier);
       setDeltaY(deltaY * multiplier);
       return this;
