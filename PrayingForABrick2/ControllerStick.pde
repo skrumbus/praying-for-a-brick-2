@@ -1,9 +1,5 @@
-class ControllerStick extends ControllerButton implements JSONifiable
+class ControllerStick extends ControllerButton implements JSONifiable, DirectionConstants
 {
-   public final int STICK_UP = 0;
-   public final int STICK_RIGHT = 1;
-   public final int STICK_DOWN = 2;
-   public final int STICK_LEFT = 3;
    protected Position position;
    protected Range xRange, yRange;
    protected ControllerButton[] engagedDirections = new ControllerButton[4];
@@ -62,16 +58,16 @@ class ControllerStick extends ControllerButton implements JSONifiable
    {
       switch(index)
       {
-         case STICK_UP:
+         case DIRECTION_UP:
             return ( (getPosition().getY() > getYRange().getMiddle() + (getThreshold() * getYRange().getTotal() ) && (getYRange().getMax() > getYRange().getMin() ) ) ||
                      (getPosition().getY() < getYRange().getMiddle() + (getThreshold() * getYRange().getTotal() ) && (getYRange().getMax() < getYRange().getMin() ) ) );
-         case STICK_DOWN:
+         case DIRECTION_DOWN:
             return ( (getPosition().getY() < getYRange().getMiddle() + (getThreshold() * getYRange().getTotal() ) && (getYRange().getMin() < getYRange().getMax() ) ) ||
                      (getPosition().getY() > getYRange().getMiddle() + (getThreshold() * getYRange().getTotal() ) && (getYRange().getMin() > getYRange().getMax() ) ) );
-         case STICK_LEFT:
+         case DIRECTION_LEFT:
             return ( (getPosition().getX() < getXRange().getMiddle() + (getThreshold() * getXRange().getTotal() ) && (getXRange().getMin() < getXRange().getMax() ) ) ||
                      (getPosition().getX() > getXRange().getMiddle() + (getThreshold() * getXRange().getTotal() ) && (getXRange().getMin() > getXRange().getMax() ) ) );
-         case STICK_RIGHT:
+         case DIRECTION_RIGHT:
             return ( (getPosition().getX() > getXRange().getMiddle() + (getThreshold() * getXRange().getTotal() ) && (getXRange().getMax() > getXRange().getMin() ) ) ||
                      (getPosition().getX() < getXRange().getMiddle() + (getThreshold() * getXRange().getTotal() ) && (getXRange().getMax() < getXRange().getMin() ) ) );
          default:

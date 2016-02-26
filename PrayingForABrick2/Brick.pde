@@ -1,7 +1,5 @@
-class Brick extends PhysicalObject implements Drawable, JSONifiable, ShapeConstants
+class Brick extends PhysicalObject implements Drawable, JSONifiable, ShapeConstants, BrickConstants
 {
-   public final float BRICK_SPACING = 5;
-   public final float BRICK_MINALPHA = .25;
    protected Health health;
    public Brick(MovingPosition position,
                 Size size,

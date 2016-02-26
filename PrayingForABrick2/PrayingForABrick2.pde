@@ -1,19 +1,3 @@
-final color[] COLORS_RAINBOW = {
-  #FF6464,
-  #FF7F64,
-  #FFFF64,
-  #64FF64,
-  #6464FF,
-  #4B6482,
-  #8B64FF
-};
-final color[] shades = {
-  #000000,
-  #323232,
-  #969696,
-  #E1E1E1,
-  #FFFFFF
-};
 float maxSpeed = 6;
 Vector<Brick> bricks = new Vector<Brick>();
 HumanPlayer player;
@@ -24,9 +8,11 @@ void setup()
                                                             .setXRange(new Range(0, width) )
                                                             .setYRange(new Range(0, height / 4) ) )
                                            .setSpacing(5)
-                                           .setRows(COLORS_RAINBOW.length)
-                                           .setColumns(COLORS_RAINBOW.length * 2)
-                                           .setColors(reverseColorSettify(COLORS_RAINBOW, COLORS_RAINBOW.length, COLORS_RAINBOW.length * 2 ));
+                                           .setRows(ColorConstants.COLORS_RAINBOW.length)
+                                           .setColumns(ColorConstants.COLORS_RAINBOW.length * 2)
+                                           .setColors(reverseColorSettify(ColorConstants.COLORS_RAINBOW,
+                                                                          ColorConstants.COLORS_RAINBOW.length,
+                                                                          ColorConstants.COLORS_RAINBOW.length * 2 ) );
    bricks = bG.standard();
    float pHeight = height / 16;
    float pWidth = width / 4;
@@ -39,9 +25,9 @@ void setup()
                                                 .setSpeedRange(new Range(0, maxSpeed) )
                                                 .setSpeed(maxSpeed / 2)
                                                 .setDeltas(0, 0)
-                                             )
+                                           )
                                .setSize(new Size(pWidth, pHeight) )
-                               .setColor(new ColorSet(color(shades[1]) ) ) )
+                               .setColor(new ColorSet(color(ColorConstants.COLORS_SHADES[1]) ) ) )
                 .setHud(new Hud())
                 .setIsXLocked(false)
                 .setIsYLocked(false);
