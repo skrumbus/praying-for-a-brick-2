@@ -1,4 +1,4 @@
-class Paddle extends PhysicalObject implements Drawable, JSONifiable, DirectionConstants, ShapeConstants
+class Paddle extends PhysicalObject implements Drawable, JSONifiable, GameConstants
 {
    protected int top;
    public JSONObject toJSON()

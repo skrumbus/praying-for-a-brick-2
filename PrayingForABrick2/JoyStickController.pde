@@ -1,6 +1,6 @@
 import processing.serial.*;
 
-class JoyStickController extends Controller implements JoyStickControllerConstants, DirectionConstants
+class JoyStickController extends Controller implements GameConstants
 {
    private Serial port;
    public JoyStickController()

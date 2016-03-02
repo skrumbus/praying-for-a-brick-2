@@ -1,4 +1,4 @@
-class Ball extends PhysicalObject implements Drawable, JSONifiable, ShapeConstants 
+class Ball extends PhysicalObject implements Drawable, JSONifiable, GameConstants
 {
    protected boolean[] doDie = new boolean[4];
    public Ball()

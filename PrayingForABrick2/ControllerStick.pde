@@ -1,4 +1,4 @@
-class ControllerStick extends ControllerButton implements JSONifiable, DirectionConstants
+class ControllerStick extends ControllerButton implements JSONifiable, GameConstants
 {
    protected Position position;
    protected Range xRange, yRange;

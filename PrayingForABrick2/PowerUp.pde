@@ -1,4 +1,4 @@
-class PowerUp extends PhysicalObject implements JSONifiable, ShapeConstants
+class PowerUp extends PhysicalObject implements JSONifiable, GameConstants
 {
    public final int POWERUP_CATCH = 1;
    public final int POWERUP_INVINCIBILITY = 2;

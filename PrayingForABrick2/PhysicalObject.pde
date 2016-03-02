@@ -1,4 +1,4 @@
-class PhysicalObject implements Drawable, JSONifiable, ShapeConstants
+class PhysicalObject implements Drawable, JSONifiable, GameConstants
 {
    protected MovingPosition position;
    protected Size size;

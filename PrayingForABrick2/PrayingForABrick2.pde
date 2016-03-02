@@ -9,17 +9,17 @@ void setup()
                                                             .setXRange(new Range(0, width) )
                                                             .setYRange(new Range(0, height / 4) ) )
                                            .setSpacing(5)
-                                           .setRows(ColorConstants.COLORS_RAINBOW.length)
-                                           .setColumns(ColorConstants.COLORS_RAINBOW.length * 2)
-                                           .setColors(reverseColorSettify(ColorConstants.COLORS_RAINBOW,
-                                                                          ColorConstants.COLORS_RAINBOW.length,
-                                                                          ColorConstants.COLORS_RAINBOW.length * 2 ) );
+                                           .setRows(GameConstants.COLORS_RAINBOW.length)
+                                           .setColumns(GameConstants.COLORS_RAINBOW.length * 2)
+                                           .setColors(reverseColorSettify(GameConstants.COLORS_RAINBOW,
+                                                                          GameConstants.COLORS_RAINBOW.length,
+                                                                          GameConstants.COLORS_RAINBOW.length * 2 ) );
    bricks = bG.standard();
    float pHeight = height / 32;
    float pWidth = width / 6;
    player = new HumanPlayer()
                 .setPaddle(new Paddle()
-                               .setTop(DirectionConstants.DIRECTION_UP) 
+                               .setTop(GameConstants.DIRECTION_UP) 
                                .setPosition(new MovingPosition(width / 2 - pWidth / 2, height - pHeight * 1.5)
                                                 .setXRange(new Range(0, width - pWidth) )
                                                 .setYRange(new Range(0, height - pHeight) )
@@ -27,7 +27,7 @@ void setup()
                                                 .setDeltas(0, 0)
                                            )
                                .setSize(new Size(pWidth, pHeight) )
-                               .setColor(new ColorSet(color(ColorConstants.COLORS_SHADES[1], 160) ) ) )
+                               .setColor(new ColorSet(color(GameConstants.COLORS_SHADES[1], 160) ) ) )
                 .setHud(new Hud())
                 .setIsXLocked(false)
                 .setIsYLocked(false)

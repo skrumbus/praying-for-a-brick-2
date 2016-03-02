@@ -1,4 +1,4 @@
-class Brick extends PhysicalObject implements Drawable, JSONifiable, ShapeConstants, BrickConstants
+class Brick extends PhysicalObject implements Drawable, JSONifiable, GameConstants
 {
    protected Health health;
    public Brick(MovingPosition position,
