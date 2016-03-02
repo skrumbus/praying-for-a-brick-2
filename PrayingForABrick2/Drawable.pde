@@ -2,5 +2,5 @@ interface Drawable
 {
    
    
-   public Object draw();
+   public Drawable draw();
 }

@@ -62,7 +62,6 @@ Serial getLastPort()
          int i = 0;
          for(; i < ports.length && !found; i++)
          {
-            println(ports[i]);
             if(ports[i].indexOf("/dev/ttyACM") >=0)
                found = true;
          }
