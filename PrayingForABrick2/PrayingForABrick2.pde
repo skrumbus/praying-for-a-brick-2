@@ -2,6 +2,7 @@
 float maxSpeed = 6;
 Vector<Brick> bricks = new Vector<Brick>();
 HumanPlayer player;
+Physics physics = new Physics();
 void setup()
 {
    size(600,600);
@@ -40,11 +41,13 @@ void setup()
                                             )
                                    .setPort(getLastPort() )
                                );
+                //.setController(new KeyboardController());
    //surface.setResizable(true);
 }
 void draw()
 {
    background(0);
+   physics.update(vectorizeObjects() );
    drawBricks(bricks);
    player.update();
    player.draw();
@@ -99,4 +102,12 @@ ColorSet[][] reverseColorSettify(color[] colors, int rows, int cols)
                       .setPrimary(colors[(i + j) % colors.length]);
    }
    return set;
+}
+Vector<PhysicalObject> vectorizeObjects()
+{
+   Vector<PhysicalObject> vector = new Vector<PhysicalObject>();
+   for(Brick brick : bricks)
+      vector.add(brick);
+   vector.add(player.getPaddle() );
+   return vector;
 }

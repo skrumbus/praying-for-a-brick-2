@@ -77,8 +77,8 @@ class HumanPlayer extends Player implements JSONifiable
       else
          yIncrement = (int) getPaddleIncrement(false);
       getPaddle().getPosition().setDeltas(xIncrement, yIncrement);
-      getPaddle().getPosition().setX(getPaddle().getPosition().getX() + getPaddle().getPosition().getDeltaX() );
-      getPaddle().getPosition().setY(getPaddle().getPosition().getY() + getPaddle().getPosition().getDeltaY() );
+      //getPaddle().getPosition().setX(getPaddle().getPosition().getX() + getPaddle().getPosition().getDeltaX() );
+      //getPaddle().getPosition().setY(getPaddle().getPosition().getY() + getPaddle().getPosition().getDeltaY() );
       return this;
    }
    
