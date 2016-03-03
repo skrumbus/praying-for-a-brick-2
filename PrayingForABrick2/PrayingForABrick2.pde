@@ -1,5 +1,4 @@
 
-float maxSpeed = 6;
 Vector<Brick> bricks = new Vector<Brick>();
 HumanPlayer player;
 Physics physics = new Physics();
@@ -24,7 +23,7 @@ void setup()
                                .setPosition(new MovingPosition(width / 2 - pWidth / 2, height - pHeight * 1.5)
                                                 .setXRange(new Range(0, width - pWidth) )
                                                 .setYRange(new Range(0, height - pHeight) )
-                                                .setSpeedRange(new Range(0, maxSpeed) )
+                                                .setSpeedRange(new Range(0, GameConstants.GAME_MAXSPEED) )
                                                 .setDeltas(0, 0)
                                            )
                                .setSize(new Size(pWidth, pHeight) )
@@ -51,6 +50,7 @@ void draw()
    drawBricks(bricks);
    player.update();
    player.draw();
+   println(player.getPaddle().getPosition().getX() + " " + player.getPaddle().getPosition().getY() );
 }
 Serial getLastPort()
 {

@@ -3,6 +3,8 @@ interface GameConstants
    public final float BRICK_SPACING = 5;
    public final float BRICK_MINALPHA = .25;
    
+   public final float GAME_MAXSPEED = 6;
+   
    final color[] COLORS_RAINBOW = 
    {
       #FF6464,
