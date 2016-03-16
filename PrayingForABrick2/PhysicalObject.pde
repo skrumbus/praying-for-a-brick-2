@@ -14,9 +14,29 @@ class PhysicalObject implements Drawable, JSONifiable, GameConstants
       obj.setInt("type", getType() );
       return obj;
    }
-   public PhysicalObject fromJSON(JSONObject obj)
+   public void fromJSON(JSONObject obj)
    {
-      return this;
+      if(!obj.isNull("this") && obj.getString("this").equals(this.getClass().getSimpleName() ) )
+      {
+         MovingPosition p = new MovingPosition();
+         Size s = new Size();
+         ColorSet c = new ColorSet();
+         if(!obj.isNull("position") )
+            p.fromJSON(obj.getJSONObject("position") );
+         if(!obj.isNull("size") )
+            s.fromJSON(obj.getJSONObject("size") );
+         if(!obj.isNull("color") )
+            c.fromJSON(obj.getJSONObject("color") );
+         if(!obj.isNull("type") )
+            setType(obj.getInt("type") );
+         else
+            setType(SHAPE_RECT);
+         setPosition(p);
+         setSize(s);
+         setColor(c);
+      }
+      else
+         println("Invalid JSONObject passed to " + this.getClass().getSimpleName() + " class." );
    }
    public PhysicalObject()
    {

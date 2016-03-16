@@ -20,9 +20,9 @@ class PlayerGroup implements JSONifiable
          obj.getJSONArray("players").setJSONObject(i, getPlayers().elementAt(i).toJSON() );
       return obj;
    }
-   public PlayerGroup fromJSON(JSONObject obj)
+   public void fromJSON(JSONObject obj)
    {
-      return this;
+      
    }
    public Vector<Player> getPlayers()
    {

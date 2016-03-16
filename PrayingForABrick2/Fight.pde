@@ -32,9 +32,9 @@ class Fight implements Drawable, JSONifiable
          obj.getJSONArray("powerUps").setJSONObject(i, getPowerUps().elementAt(i).toJSON() );
       return obj;
    }
-   public Fight fromJSON(JSONObject obj)
+   public void fromJSON(JSONObject obj)
    {
-      return this;
+      
    }
    public Fight(int fightType, BrickGenerator gen)
    {

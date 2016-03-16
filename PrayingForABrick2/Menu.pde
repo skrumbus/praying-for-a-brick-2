@@ -7,6 +7,14 @@ class Menu implements Drawable, JSONifiable
    protected Position position;
    protected Size size;
    protected Text title;
+   public Menu()
+   {
+      items = new Vector<MenuItem>();
+      setColor(new ColorSet() );
+      setPosition(new Position() );
+      setSize(new Size() );
+      setTitle(new Text() );
+   }
    public JSONObject toJSON()
    {
       JSONObject obj = new JSONObject();
@@ -20,9 +28,39 @@ class Menu implements Drawable, JSONifiable
          obj.getJSONArray("items").setJSONObject(i,  getItems().elementAt(i).toJSON() );
       return obj;
    }
-   public Menu fromJSON(JSONObject obj)
+   public void fromJSON(JSONObject obj)
    {
-      return this;
+      if(!obj.isNull("this") && obj.getString("this").equals(this.getClass().getSimpleName() ) )
+      {
+         items = new Vector<MenuItem>();
+         ColorSet c = new ColorSet();
+         Position p = new Position();
+         Size s = new Size();
+         Text t = new Text();
+         if(!obj.isNull("items") )
+         {
+            for(int i = 0; i < obj.getJSONArray("items").size(); i++)
+            {
+               MenuItem m = new MenuItem();
+               m.fromJSON(obj.getJSONArray("items").getJSONObject(i) );
+               items.add(m);
+            }
+         }
+         if(!obj.isNull("color") )
+            c.fromJSON(obj.getJSONObject("color") );
+         if(!obj.isNull("position") )
+            p.fromJSON(obj.getJSONObject("position") );
+         if(!obj.isNull("size") )
+            s.fromJSON(obj.getJSONObject("size") );
+         if(!obj.isNull("title") )
+            t.fromJSON(obj.getJSONObject("title") );
+         setColor(c);
+         setPosition(p);
+         setSize(s);
+         setTitle(t);
+      }
+      else
+         println("Invalid JSONObject passed to " + this.getClass().getSimpleName() + " class." );
    }
    public Vector<MenuItem> getItems()
    {

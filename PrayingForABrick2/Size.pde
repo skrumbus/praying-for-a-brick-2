@@ -9,9 +9,21 @@ class Size implements JSONifiable
       obj.setFloat("height", getHeight() );
       return obj;
    }
-   public Size fromJSON(JSONObject obj)
+   public void fromJSON(JSONObject obj)
    {
-      return this;
+      if(!obj.isNull("this") && obj.getString("this").equals(this.getClass().getSimpleName() ) )
+      {
+         if(!obj.isNull("width") )
+            setWidth(obj.getFloat("width") );
+         else
+            setWidth(0);
+         if(!obj.isNull("height") )
+            setHeight(obj.getFloat("height") );
+         else
+            setHeight(0);
+      }
+      else
+         println("Invalid JSONObject passed to " + this.getClass().getSimpleName() + " class." );
    }
    public Size()
    {

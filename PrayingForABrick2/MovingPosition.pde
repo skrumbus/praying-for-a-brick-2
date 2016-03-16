@@ -18,9 +18,68 @@ class MovingPosition extends Position implements JSONifiable
       obj.setJSONObject("speedRange", getSpeedRange().toJSON() );
       return obj;
    }
-   public MovingPosition fromJSON(JSONObject obj)
+   protected float checkAndReturn(JSONObject obj, String name, float def)
    {
-      return this;
+      if(!obj.isNull(name) )
+         return obj.getFloat(name);
+      else
+         return def;
+   }
+   public void fromJSON(JSONObject obj)
+   {
+      if(!obj.isNull("this") && obj.getString("this").equals(this.getClass().getSimpleName() ) )
+      {
+         if(!obj.isNull("x") )
+         {
+            setX(checkAndReturn(obj.getJSONObject("x"), "x", 0) );
+            setDeltaX(checkAndReturn(obj.getJSONObject("x"), "delta", 0) );
+            if(!obj.getJSONObject("x").isNull("range") )
+            {
+               Range r = new Range();
+               r.fromJSON(obj.getJSONObject("x").getJSONObject("range") );
+               setXRange(r);
+            }
+            else
+               setXRange(new Range(getX(), getX() ) );
+         }
+         else
+         {
+            setX(0);
+            setDeltaX(0);
+            setXRange(new Range(getX(), getX() ) );
+         }
+         if(!obj.isNull("y") )
+         {
+            setY(checkAndReturn(obj.getJSONObject("y"), "y", 0) );
+            setDeltaY(checkAndReturn(obj.getJSONObject("y"), "delta", 0) );
+            if(!obj.getJSONObject("y").isNull("range") )
+            {
+               Range r = new Range();
+               r.fromJSON(obj.getJSONObject("y").getJSONObject("range") );
+               setYRange(r);
+            }
+            else
+               setYRange(new Range(getY(), getY() ) );
+         }
+         else
+         {
+            setY(0);
+            setDeltaY(0);
+            setYRange(new Range(getY(), getY() ) );
+         }
+         if(!obj.isNull("speedRange") )
+         {
+            Range r = new Range();
+            r.fromJSON(obj.getJSONObject("speedRange") );
+            setSpeedRange(r);
+         }
+         else
+            setSpeedRange(new Range() );
+         setDeltaY(getDeltaY() * getMultiplier(getDeltaX(), getDeltaY() ) );
+         setDeltaX(getDeltaX() * getMultiplier(getDeltaX(), getDeltaY() ) );
+      }
+      else
+         println("Invalid JSONObject passed to " + this.getClass().getSimpleName() + " class." );
    }
    public MovingPosition()
    {

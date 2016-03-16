@@ -10,9 +10,22 @@ class ControllerButton implements JSONifiable
       obj.setBoolean("isHeld", getIsHeld() );
       return obj;
    }
-   public ControllerButton fromJSON(JSONObject obj)
+   protected boolean checkAndReturn(JSONObject obj, String name, boolean def)
    {
-      return this;
+      if(!obj.isNull(name) )
+         return obj.getBoolean(name);
+      else
+         return def;
+   }
+   public void fromJSON(JSONObject obj)
+   {
+      if(!obj.isNull("this") && obj.getString("this").equals(this.getClass().getSimpleName() ) )
+      {
+         setIsTapped(checkAndReturn(obj, "isTapped", false) );
+         setIsHeld(checkAndReturn(obj, "isHeld", false) );
+      }
+      else
+         println("Invalid JSONObject passed to " + this.getClass().getSimpleName() + " class." );
    }
    public ControllerButton()
    {

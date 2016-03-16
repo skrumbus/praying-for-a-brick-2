@@ -9,9 +9,27 @@ class Range implements JSONifiable
       obj.setFloat("max", getMax() );
       return obj;
    }
-   public Range fromJSON(JSONObject obj)
+   public void fromJSON(JSONObject obj)
    {
-      return this;
+      if(!obj.isNull("this") && obj.getString("this").equals(this.getClass().getSimpleName() ) )
+      {
+         if(!obj.isNull("min") )
+            setMin(obj.getFloat("min") );
+         else
+            setMin(0);
+         if(!obj.isNull("max") )
+            setMax(obj.getFloat("max") );
+         else
+            setMax(0);
+         if(getMin() > getMax() )
+         {
+            float swap = getMin();
+            setMin(getMax() );
+            setMax(swap);
+         }
+      }
+      else
+         println("Invalid JSONObject passed to " + this.getClass().getSimpleName() + " class." );
    }
    public Range()
    {

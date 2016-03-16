@@ -8,9 +8,35 @@ class HumanPlayer extends Player implements JSONifiable
       obj.setJSONObject("controller", controller.toJSON() );
       return obj;
    }
-   public HumanPlayer fromJSON(JSONObject obj)
+   public void fromJSON(JSONObject obj)
    {
-      return this;
+      if(!obj.isNull("this") && obj.getString("this").equals(this.getClass().getSimpleName() ) )
+      {
+         obj.setString("this", super.getClass().getSimpleName() );
+         super.fromJSON(obj);
+         if(!obj.isNull("controller") )
+         {
+            if(!obj.getJSONObject("controller").isNull("this") )
+            {
+               if(obj.getJSONObject("controller").getString("this").equals("KeyboardController") )
+               {
+                  KeyboardController k = new KeyboardController();
+               }
+               else if(obj.getJSONObject("controller").getString("this").equals("JoyStickController") )
+               {
+                  JoyStickController j = new JoyStickController();
+                  j.fromJSON(obj.getJSONObject("controller") );
+                  setController(j);
+               }
+               else
+               {
+                  setController(null);
+               }
+            }
+         }
+      }
+      else
+         println("Invalid JSONObject passed to " + this.getClass().getSimpleName() + " class." );
    }
    public Controller getController()
    {
@@ -68,15 +94,10 @@ class HumanPlayer extends Player implements JSONifiable
       int xIncrement;
       int yIncrement;
       controller.update();
-      if(isXLocked)
-         xIncrement = 0;
-      else
-         xIncrement = (int) getPaddleIncrement(true);
-      if(isYLocked)
-         yIncrement = 0;
-      else
-         yIncrement = (int) getPaddleIncrement(false);
+      xIncrement = (int) getPaddleIncrement(true);
+      yIncrement = (int) getPaddleIncrement(false);
       getPaddle().getPosition().setDeltas(xIncrement, yIncrement);
+      lockDeltas();
       //getPaddle().getPosition().setX(getPaddle().getPosition().getX() + getPaddle().getPosition().getDeltaX() );
       //getPaddle().getPosition().setY(getPaddle().getPosition().getY() + getPaddle().getPosition().getDeltaY() );
       return this;

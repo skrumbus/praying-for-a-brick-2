@@ -20,9 +20,34 @@ class ColorSet implements Drawable, JSONifiable
       obj.setInt("alpha", (int) alpha(c) );
       return obj;
    }
-   public ColorSet fromJSON(JSONObject obj)
+   protected color colorFromJSON(JSONObject obj)
    {
-      return this;
+      int red = 0, green = 0, blue = 0, alpha = 0;
+      if(!obj.isNull("red") )
+         red = obj.getInt("red");
+      if(!obj.isNull("green") )
+         green = obj.getInt("green");
+      if(!obj.isNull("blue") )
+         blue = obj.getInt("blue");
+      if(!obj.isNull("alpha") )
+         alpha = obj.getInt("alpha");
+      return color(red, green, blue, alpha);
+   }
+   public void fromJSON(JSONObject obj)
+   {
+      if(!obj.isNull("this") && obj.getString("this").equals(this.getClass().getSimpleName() ) )
+      {
+         if(!obj.isNull("primary") && !obj.getJSONObject("primary").isNull("this") && obj.getJSONObject("primary").getString("this").equals("color") )
+            setPrimary(colorFromJSON(obj.getJSONObject("primary") ) );
+         else
+            setPrimary(color(#000000, 0) );
+         if(!obj.isNull("stroke") && !obj.getJSONObject("stroke").isNull("this") && obj.getJSONObject("stroke").getString("this").equals("color") )
+            setStroke(colorFromJSON(obj.getJSONObject("stroke") ) );
+         else
+            setStroke(color(#000000, 0) );
+      }
+      else
+         println("Invalid JSONObject passed to " + this.getClass().getSimpleName() + " class.");
    }
    public ColorSet()
    {

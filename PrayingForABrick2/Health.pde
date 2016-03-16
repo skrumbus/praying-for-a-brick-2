@@ -10,9 +10,22 @@ class Health implements JSONifiable
       obj.setInt("maxHealth", getMaxHealth() );
       return obj;
    }
-   public Health fromJSON(JSONObject obj)
+   protected int checkAndReturn(JSONObject obj, String name, int def)
    {
-      return this;
+      if(!obj.isNull(name) )
+         return obj.getInt(name);
+      else
+         return def;
+   }
+   public void fromJSON(JSONObject obj)
+   {
+      if(!obj.isNull("this") && obj.getString("this").equals(this.getClass().getSimpleName() ) )
+      {
+         setMaxHealth(checkAndReturn(obj, "maxHealth", 0) );
+         setCurrentHealth(checkAndReturn(obj, "currentHealth", getMaxHealth() ) );
+      }
+      else
+         println("Invalid JSONObject passed to " + this.getClass().getSimpleName() + " class." );
    }
    public Health()
    {

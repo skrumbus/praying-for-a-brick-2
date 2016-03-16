@@ -4,6 +4,8 @@ class Ball extends PhysicalObject implements Drawable, JSONifiable, GameConstant
    public Ball()
    {
       super(SHAPE_ELLIPSE);
+      for(int i = 0; i < getDoDie().length; i++)
+         getDoDie()[i] = false;
    }
    public Ball(MovingPosition position,
                float r,
@@ -15,7 +17,6 @@ class Ball extends PhysicalObject implements Drawable, JSONifiable, GameConstant
             myColor,
             SHAPE_ELLIPSE);
       setDoDie(doDie);
-         
    }
    public boolean[] getDoDie()
    {
@@ -26,19 +27,6 @@ class Ball extends PhysicalObject implements Drawable, JSONifiable, GameConstant
       if(doDie.length >= this.doDie.length)
          for(int i = 0; i < this.doDie.length; i++)
             this.doDie[i] = doDie[i];
-      return this;
-   }
-   public boolean getDoDieSide(int side)
-   {
-      if(side >= 0 && side < getDoDie().length)
-         return getDoDie()[side];
-      else
-         return false;
-   }
-   public Ball setDoDie(boolean doDie, int side)
-   {
-      if(side >= 0 && side < getDoDie().length)
-         this.doDie[side] = doDie;
       return this;
    }
    public float getRadius()
@@ -65,18 +53,27 @@ class Ball extends PhysicalObject implements Drawable, JSONifiable, GameConstant
    {
       JSONObject obj = super.toJSON();
       obj.setString("this", this.getClass().getSimpleName() );
-      obj.getJSONObject("size").remove("height");
-      obj.getJSONObject("size").remove("width");
-      obj.getJSONObject("size").setFloat("radius", getRadius() );
       obj.setJSONArray("doDie", new JSONArray() );
       for(int i = 0; i < getDoDie().length; i++)
          obj.getJSONArray("doDie").setBoolean(i, getDoDie()[i]);
       return obj;
-      }
-      public Ball fromJSON(JSONObject obj)
+   }
+   public void fromJSON(JSONObject obj)
+   {
+      if(!obj.isNull("this") && obj.getString("this").equals(this.getClass().getSimpleName() ) )
       {
-         return this;
+         obj.setString("this", super.getClass().getSimpleName() );
+         super.fromJSON(obj);
+         if(!obj.isNull("doDie") )
+            for(int i = 0; i < getDoDie().length; i++)
+               getDoDie()[i] = obj.getJSONArray("doDie").getBoolean(i);
+         else
+            for(int i = 0; i < getDoDie().length; i++)
+               getDoDie()[i] = false;
       }
+      else
+         println("Invalid JSONObject passed to " + this.getClass().getSimpleName() + " class." );
+   }
    public Ball draw()
    {
       super.draw();

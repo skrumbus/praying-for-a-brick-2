@@ -65,13 +65,23 @@ class Brick extends PhysicalObject implements Drawable, JSONifiable, GameConstan
    public JSONObject toJSON()
    {
       JSONObject obj = super.toJSON();
-      obj.setString("this",this.getClass().getSimpleName() );
+      obj.setString("this", this.getClass().getSimpleName() );
       obj.setJSONObject("health", getHealth().toJSON() );
       return obj;
    }
-   public Brick fromJSON(JSONObject obj)
+   public void fromJSON(JSONObject obj)
    {
-      return this;
+      if(!obj.isNull("this") && obj.getString("this").equals(this.getClass().getSimpleName() ) )
+      {
+         Health h = new Health();
+         obj.setString("this", super.getClass().getSimpleName() );
+         super.fromJSON(obj);
+         if(!obj.isNull("health") )
+            h.fromJSON(obj.getJSONObject("health") );
+         setHealth(h);
+      }
+      else
+         println("Invalid JSONObject passed to " + this.getClass().getSimpleName() + " class." );
    }
    public Brick setColor(ColorSet myColor)
    {

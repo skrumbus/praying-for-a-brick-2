@@ -22,9 +22,9 @@ class MenuItem implements Drawable, JSONifiable
       obj.setJSONObject("size", getSize().toJSON() );
       return obj;
    }
-   public MenuItem fromJSON(JSONObject obj)
+   public void fromJSON(JSONObject obj)
    {
-      return this;
+      
    }
    public MenuItem()
    {

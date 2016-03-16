@@ -1,5 +1,5 @@
 interface JSONifiable
 {
    public JSONObject toJSON();
-   public JSONifiable fromJSON(JSONObject obj);
+   public void fromJSON(JSONObject obj);
 }

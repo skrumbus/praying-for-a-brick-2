@@ -1,4 +1,4 @@
-class BrickGenerator
+class BrickGenerator implements JSONifiable
 {
    protected float spacing;
    protected int rows, cols;
@@ -7,10 +7,74 @@ class BrickGenerator
    public BrickGenerator()
    {
       setSpacing(0);
-      setRows(0);
-      setColumns(0);
-      setColors(new ColorSet[0][0]);
-      setPosition(new MovingPosition(0,0) );
+      setRows(1);
+      setColumns(1);
+      colors = new ColorSet[1][1];
+      colors[0][0] = new ColorSet();
+      setPosition(new MovingPosition() );
+   }
+   public JSONObject toJSON()
+   {
+      JSONObject obj = new JSONObject();
+      obj.setString("this", this.getClass().getSimpleName() );
+      obj.setFloat("spacing", spacing);
+      obj.setInt("rows", rows);
+      obj.setInt("columns", cols);
+      obj.setJSONArray("colors", new JSONArray() );
+      for(int i = 0; i < colors.length; i++)
+      {
+         obj.getJSONArray("colors").setJSONArray(i, new JSONArray() );
+         for(int j = 0; j < colors[i].length; j++)
+            obj.getJSONArray("colors").getJSONArray(i).setJSONObject(j, colors[i][j].toJSON() );
+      }
+      obj.setJSONObject("position", position.toJSON() );
+      return obj;
+   }
+   public void fromJSON(JSONObject obj)
+   {
+      if(!obj.isNull("this") && obj.getString("this").equals(this.getClass().getSimpleName() ) )
+      {
+         if(!obj.isNull("spacing") && obj.getFloat("spacing") >= 0)
+            setSpacing(obj.getFloat("spacing") );
+         else
+            setSpacing(0);
+         if(!obj.isNull("rows") && obj.getInt("rows") >= 1)
+            setRows(obj.getInt("rows") );
+         else
+            setRows(1);
+         if(!obj.isNull("columns") && obj.getInt("columns") >= 1)
+            setColumns(obj.getInt("columns") );
+         else
+            setColumns(1);
+         if(!obj.isNull("colors") )
+         {
+            colors = new ColorSet[obj.getJSONArray("colors").size()][];
+            for(int i = 0; i < colors.length; i++)
+            {
+               colors[i] = new ColorSet[obj.getJSONArray("colors").getJSONArray(i).size()];
+               for(int j = 0; j < colors[i].length; j++)
+               {
+                  colors[i][j] = new ColorSet();
+                  colors[i][j].fromJSON(obj.getJSONArray("colors").getJSONArray(i).getJSONObject(j) );
+               }
+            }
+         }
+         else
+         {
+            colors = new ColorSet[1][1];
+            colors[0][0] = new ColorSet();
+         }
+         if(!obj.isNull("position") )
+         {
+            MovingPosition p = new MovingPosition();
+            p.fromJSON(obj.getJSONObject("position") );
+            setPosition(p);
+         }
+         else
+            setPosition(new MovingPosition() );
+      }
+      else
+         println("Invalid JSONObject passed to " + this.getClass().getSimpleName() + " class." );
    }
    public float getSpacing()
    {

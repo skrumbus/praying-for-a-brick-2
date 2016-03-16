@@ -1,0 +1,192 @@
+{
+  "hud": {
+    "position": {
+      "this": "Position",
+      "y": 0,
+      "x": 0
+    },
+    "title": {
+      "position": {
+        "this": "Position",
+        "y": 0,
+        "x": 0
+      },
+      "color": {
+        "stroke": {
+          "red": 0,
+          "blue": 0,
+          "green": 0,
+          "alpha": 0,
+          "this": "color"
+        },
+        "primary": {
+          "red": 0,
+          "blue": 0,
+          "green": 0,
+          "alpha": 0,
+          "this": "color"
+        },
+        "this": "ColorSet"
+      },
+      "font": {
+        "this": "Text",
+        "size": 0
+      },
+      "this": "Text"
+    },
+    "items": [],
+    "color": {
+      "stroke": {
+        "red": 0,
+        "blue": 0,
+        "green": 0,
+        "alpha": 0,
+        "this": "color"
+      },
+      "primary": {
+        "red": 0,
+        "blue": 0,
+        "green": 0,
+        "alpha": 0,
+        "this": "color"
+      },
+      "this": "ColorSet"
+    },
+    "health": {
+      "currentHealth": 0,
+      "maxHealth": 0,
+      "this": "Health"
+    },
+    "this": "Hud",
+    "size": {
+      "height": 0,
+      "width": 0,
+      "this": "Size"
+    }
+  },
+  "controller": {
+    "stick": {
+      "stick": {
+        "position": {
+          "this": "Position",
+          "y": 511,
+          "x": 511
+        },
+        "xRange": {
+          "min": 0,
+          "max": 1023,
+          "this": "Range"
+        },
+        "yRange": {
+          "min": 0,
+          "max": 1023,
+          "this": "Range"
+        },
+        "engagedDirections": [
+          {
+            "isHeld": false,
+            "isTapped": false,
+            "this": "ControllerButton"
+          },
+          {
+            "isHeld": false,
+            "isTapped": false,
+            "this": "ControllerButton"
+          },
+          {
+            "isHeld": false,
+            "isTapped": false,
+            "this": "ControllerButton"
+          },
+          {
+            "isHeld": false,
+            "isTapped": false,
+            "this": "ControllerButton"
+          }
+        ],
+        "threshold": 0.75
+      },
+      "isHeld": false,
+      "isTapped": false,
+      "this": "ControllerStick"
+    },
+    "faceButtons": [
+      {
+        "isHeld": false,
+        "isTapped": false,
+        "this": "ControllerButton"
+      },
+      {
+        "isHeld": false,
+        "isTapped": false,
+        "this": "ControllerButton"
+      },
+      {
+        "isHeld": false,
+        "isTapped": false,
+        "this": "ControllerButton"
+      },
+      {
+        "isHeld": false,
+        "isTapped": false,
+        "this": "ControllerButton"
+      }
+    ],
+    "this": "JoyStickController"
+  },
+  "doDrawHud": true,
+  "this": "HumanPlayer",
+  "paddle": {
+    "position": {
+      "speedRange": {
+        "min": 0,
+        "max": 6,
+        "this": "Range"
+      },
+      "this": "MovingPosition",
+      "y": {
+        "range": {
+          "min": 0,
+          "max": 582,
+          "this": "Range"
+        },
+        "delta": 0,
+        "y": 573
+      },
+      "x": {
+        "range": {
+          "min": 0,
+          "max": 500,
+          "this": "Range"
+        },
+        "delta": 0,
+        "x": 250
+      }
+    },
+    "color": {
+      "stroke": {
+        "red": 0,
+        "blue": 0,
+        "green": 0,
+        "alpha": 0,
+        "this": "color"
+      },
+      "primary": {
+        "red": 50,
+        "blue": 50,
+        "green": 50,
+        "alpha": 160,
+        "this": "color"
+      },
+      "this": "ColorSet"
+    },
+    "type": 1,
+    "this": "Paddle",
+    "top": 0,
+    "size": {
+      "height": 18,
+      "width": 100,
+      "this": "Size"
+    }
+  }
+}

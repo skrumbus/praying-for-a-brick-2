@@ -21,9 +21,33 @@ abstract class Player implements JSONifiable
       obj.setJSONObject("hud", hud.toJSON() );
       return obj;
    }
-   public Player fromJSON(JSONObject obj)
+   public void fromJSON(JSONObject obj)
    {
-      return this;
+      if(!obj.isNull("this") && obj.getString("this").equals(this.getClass().getSimpleName() ) )
+      {
+         if(!obj.isNull("doDrawHud") )
+            setDoDrawHud(obj.getBoolean("doDrawHud") );
+         else
+            setDoDrawHud(true);
+         if(!obj.isNull("paddle") )
+         {
+            Paddle p = new Paddle();
+            p.fromJSON(obj.getJSONObject("paddle") );
+            setPaddle(p);
+         }
+         else
+            setPaddle(new Paddle() );
+         if(!obj.isNull("hud") )
+         {
+            Hud h = new Hud();
+            h.fromJSON(obj.getJSONObject("hud") );
+            setHud(h);
+         }
+         else
+            setHud(new Hud() );
+      }
+      else
+         println("Invalid JSONObject passed to " + this.getClass().getSimpleName() + " class." );
    }
    public Player(Paddle paddle,
                  Hud hud,
@@ -77,6 +101,13 @@ abstract class Player implements JSONifiable
    {
       this.isXLocked = isXLocked;
       return this;
+   }
+   protected void lockDeltas()
+   {
+      if(getIsXLocked() )
+         getPaddle().getPosition().setDeltaX(0);
+      if(getIsYLocked() )
+         getPaddle().getPosition().setDeltaY(0);
    }
    public abstract Player update();
    public Player draw()

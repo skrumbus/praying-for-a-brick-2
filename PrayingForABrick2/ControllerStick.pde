@@ -15,11 +15,59 @@ class ControllerStick extends ControllerButton implements JSONifiable, GameConst
       obj.getJSONObject("stick").setJSONArray("engagedDirections", new JSONArray() );
       for(int i = 0; i < getEngagedDirections().length; i++)
          obj.getJSONObject("stick").getJSONArray("engagedDirections").setJSONObject(i, getEngagedDirections()[i].toJSON() );
+      obj.getJSONObject("stick").setFloat("threshold", getThreshold() );
       return obj;
    }
-   public ControllerStick fromJSON(JSONObject obj)
+   public void fromJSON(JSONObject obj)
    {
-      return this;
+      if(!obj.isNull("this") && obj.getString("this").equals(this.getClass().getSimpleName() ) )
+      {
+         obj.setString("this", super.getClass().getSimpleName() );
+         super.fromJSON(obj);
+         if(!obj.isNull("stick") )
+         {
+            Position p = new Position();
+            Range x = new Range(), y = new Range();
+            if(!obj.getJSONObject("stick").isNull("threshold") )
+               setThreshold(obj.getJSONObject("stick").getFloat("threshold") );
+            else
+               setThreshold(.75);
+            if(!obj.getJSONObject("stick").isNull("engagedDirections") )
+               for(int i = 0; i < getEngagedDirections().length; i++)
+               {
+                  ControllerButton b = new ControllerButton();
+                  b.fromJSON(obj.getJSONObject("stick").getJSONArray("engagedDirections").getJSONObject(i) );
+                  getEngagedDirections()[i] = b;
+               }
+            else
+               for(int i = 0; i < getEngagedDirections().length; i++)
+               {
+                  ControllerButton b = new ControllerButton();
+                  b.fromJSON(obj.getJSONObject("stick").getJSONArray("engagedDirections").getJSONObject(i) );
+                  getEngagedDirections()[i] = b;
+               }
+            if(!obj.getJSONObject("stick").isNull("position") )
+               p.fromJSON(obj.getJSONObject("stick").getJSONObject("position") );
+            if(!obj.getJSONObject("stick").isNull("xRange") )
+               x.fromJSON(obj.getJSONObject("stick").getJSONObject("xRange") );
+            if(!obj.getJSONObject("stick").isNull("yRange") )
+               y.fromJSON(obj.getJSONObject("stick").getJSONObject("yRange") );
+            setPosition(p);
+            setXRange(x);
+            setYRange(y);
+         }
+         else
+         {
+            setPosition(new Position(0, 0) );
+            setXRange(new Range(0, 0) );
+            setYRange(new Range(0, 0) );
+            for(int i = 0; i < getEngagedDirections().length; i++)
+               getEngagedDirections()[i] = new ControllerButton(getIsDirectionEngaged(i) );
+            setThreshold(.75);
+         }
+      }
+      else
+         println("Invalid JSONObject passed to " + this.getClass().getSimpleName() + " class." );
    }
    public ControllerStick()
    {

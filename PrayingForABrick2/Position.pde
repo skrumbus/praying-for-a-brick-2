@@ -9,9 +9,22 @@ class Position implements JSONifiable
       obj.setFloat("y", getY() );
       return obj;
    }
-   public Position fromJSON(JSONObject obj)
+   protected float checkAndReturn(JSONObject obj, String name, float def)
    {
-      return this;
+      if(!obj.isNull(name) )
+         return object.getFloat(name);
+      else
+         return def;
+   }
+   public void fromJSON(JSONObject obj)
+   {
+      if(!obj.isNull("this") && obj.getString("this").equals(this.getClass().getSimpleName() ) )
+      {
+         setX(checkAndReturn(obj, "x", 0) );
+         setY(checkAndReturn(obj, "y", 0) );
+      }
+      else
+         println("Invalid JSONObject passed to " + this.getClass().getSimpleName() + " class." );
    }
    public Position()
    {

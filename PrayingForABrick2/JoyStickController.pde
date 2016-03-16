@@ -1,8 +1,24 @@
 import processing.serial.*;
 
-class JoyStickController extends Controller implements GameConstants
+class JoyStickController extends Controller implements GameConstants, JSONifiable
 {
    private Serial port;
+   public JSONObject toJSON()
+   {
+      JSONObject obj = super.toJSON();
+      obj.setString("this", this.getClass().getSimpleName() );
+      return obj;
+   }
+   public void fromJSON(JSONObject obj)
+   {
+      if(!obj.isNull("this") && obj.getString("this").equals(this.getClass().getSimpleName() ) )
+      {
+         obj.setString("this", super.getClass().getSimpleName() );
+         super.fromJSON(obj);
+      }
+      else
+         println("Invalid JSONObject passed to " + this.getClass().getSimpleName() + " class." );
+   }
    public JoyStickController()
    {
       super();

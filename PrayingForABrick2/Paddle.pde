@@ -8,9 +8,19 @@ class Paddle extends PhysicalObject implements Drawable, JSONifiable, GameConsta
       obj.setInt("top", getTop() );
       return obj;
    }
-   public Paddle fromJSON(JSONObject obj)
+   public void fromJSON(JSONObject obj)
    {
-      return this;
+      if(!obj.isNull("this") && obj.getString("this").equals(this.getClass().getSimpleName() ) )
+      {
+         obj.setString("this", super.getClass().getSimpleName() );
+         super.fromJSON(obj);
+         if(!obj.isNull("top") )
+            setTop(obj.getInt("top") );
+         else
+            setTop(DIRECTION_UP);
+      }
+      else
+         println("Invalid JSONObject passed to " + this.getClass().getSimpleName() + " class." );
    }
    Paddle()
    {

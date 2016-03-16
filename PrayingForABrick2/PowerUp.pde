@@ -1,25 +1,5 @@
 class PowerUp extends PhysicalObject implements JSONifiable, GameConstants
 {
-   public final int POWERUP_CATCH = 1;
-   public final int POWERUP_INVINCIBILITY = 2;
-   public final int POWERUP_WIDEPADDLE = 3;
-   public final int POWERUP_SLOWBALL = 4;
-   public final int POWERUP_FASTPADDLE = 5;
-   public final int POWERUP_LASER = 6;
-   public final int POWERUP_LINEBREAK = 7;
-   public final int POWERUP_DOUBLE = 8;
-   public final int POWERUP_STRONGBALL = 9;
-   public final int POWERUP_LASERSHIELD = 10;
-   
-   public final int POWERDOWN_SHORTPADDLE = -1;
-   public final int POWERDOWN_SLOWPADDLE = -2;
-   public final int POWERDOWN_FASTBALL = -3;
-   public final int POWERDOWN_WEAKBALL = -4;
-
-   public final int POWERUPSTATE_FREE = 1;
-   public final int POWERUPSTATE_AVAILABLE = 2;
-   public final int POWERUPSTATE_ACTIVE = 3;
-
    protected int powerUpType;
    protected int state;
    protected int count;
@@ -27,15 +7,30 @@ class PowerUp extends PhysicalObject implements JSONifiable, GameConstants
    {
       JSONObject obj = super.toJSON();
       obj.setString("this", this.getClass().getSimpleName() );
-      obj.setJSONObject("powerUpInfo", new JSONObject() );
-      obj.getJSONObject("powerUpInfo").setInt("type", getPowerUpType() );
-      obj.getJSONObject("powerUpInfo").setInt("state", getState() );
-      obj.getJSONObject("powerUpInfo").setInt("count", count);
+      obj.setInt("type", getPowerUpType() );
+      obj.setInt("state", getState() );
+      obj.setInt("count", count);
       return obj;
    }
-   public PowerUp fromJSON(JSONObject obj)
+   public void fromJSON(JSONObject obj)
    {
-      return this;
+      if(!obj.isNull("this") && obj.getString("this").equals(this.getClass().getSimpleName() ) )
+      {
+         if(!obj.isNull("type") )
+            setType(obj.getInt("type") );
+         else
+            setType(0);
+         if(!obj.isNull("state") )
+            setState(obj.getInt("state") );
+         else
+            setState(0);
+         if(!obj.isNull("count") )
+            setCount(obj.getInt("count") );
+         else
+            setCount(0);
+      }
+      else
+         println("Invalid JSONObject passed to " + this.getClass().getSimpleName() + " class." );
    }
    public PowerUp(MovingPosition position,
                   float r,

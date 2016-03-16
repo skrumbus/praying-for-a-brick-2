@@ -4,6 +4,13 @@ class Text implements Drawable, JSONifiable
    protected String text;
    protected Position position;
    protected ColorSet myColor;
+   public Text()
+   {
+      setFont(new PFont() );
+      setText("");
+      setPosition(new Position() );
+      setColor(new ColorSet() );
+   }
    public JSONObject toJSON()
    {
       JSONObject obj = new JSONObject();
@@ -21,9 +28,18 @@ class Text implements Drawable, JSONifiable
       obj.setInt("size", getFont().getSize() );
       return obj;
    }
-   public Text fromJSON(JSONObject obj)
+   protected PFont fontFromJSON(JSONObject obj)
    {
-      return this;
+      if(!obj.isNull("this") && obj.getString("this").equals(this.getClass().getSimpleName() ) )
+      {
+         
+      }
+      else
+         println("Invalid JSONObject passed to " + this.getClass().getSimpleName() + " class." );
+   }
+   public void fromJSON(JSONObject obj)
+   {
+      
    }
    public PFont getFont()
    {

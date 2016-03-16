@@ -41,4 +41,24 @@ interface GameConstants
    
    public final int SHAPE_RECT = 1;
    public final int SHAPE_ELLIPSE = 2;
+   
+   public final int POWERUP_CATCH = 1;
+   public final int POWERUP_INVINCIBILITY = 2;
+   public final int POWERUP_WIDEPADDLE = 3;
+   public final int POWERUP_SLOWBALL = 4;
+   public final int POWERUP_FASTPADDLE = 5;
+   public final int POWERUP_LASER = 6;
+   public final int POWERUP_LINEBREAK = 7;
+   public final int POWERUP_DOUBLE = 8;
+   public final int POWERUP_STRONGBALL = 9;
+   public final int POWERUP_LASERSHIELD = 10;
+   
+   public final int POWERDOWN_SHORTPADDLE = -1;
+   public final int POWERDOWN_SLOWPADDLE = -2;
+   public final int POWERDOWN_FASTBALL = -3;
+   public final int POWERDOWN_WEAKBALL = -4;
+
+   public final int POWERUPSTATE_FREE = 1;
+   public final int POWERUPSTATE_AVAILABLE = 2;
+   public final int POWERUPSTATE_ACTIVE = 3;
 }
