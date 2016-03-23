@@ -12,7 +12,7 @@ class Position implements JSONifiable
    protected float checkAndReturn(JSONObject obj, String name, float def)
    {
       if(!obj.isNull(name) )
-         return object.getFloat(name);
+         return obj.getFloat(name);
       else
          return def;
    }

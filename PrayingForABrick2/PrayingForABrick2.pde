@@ -39,7 +39,7 @@ void setup()
             .setXRange(new Range(0, 1023) )
             .setYRange(new Range(0, 1023) )
             .setThreshold(.75)
-            .setPosition(new Position(511, 511))
+            .setPosition(new Position(511, 511) )
          )
          .setPort(getLastPort() )
       );

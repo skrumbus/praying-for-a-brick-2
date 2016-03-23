@@ -1707,8 +1707,8 @@
       }
     ]
   ],
-  "columns": 14,
+  "columns": 1,
   "spacing": 5,
   "this": "BrickGenerator",
-  "rows": 7
+  "rows": 1
 }

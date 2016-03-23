@@ -36,6 +36,7 @@ class Text implements Drawable, JSONifiable
       }
       else
          println("Invalid JSONObject passed to " + this.getClass().getSimpleName() + " class." );
+      return new PFont();
    }
    public void fromJSON(JSONObject obj)
    {
