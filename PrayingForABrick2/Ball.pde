@@ -6,6 +6,7 @@ class Ball extends PhysicalObject implements Drawable, JSONifiable, GameConstant
       super(SHAPE_ELLIPSE);
       for(int i = 0; i < getDoDie().length; i++)
          getDoDie()[i] = false;
+      setDoesBounce(true);
    }
    public Ball(MovingPosition position,
                float r,
@@ -17,6 +18,7 @@ class Ball extends PhysicalObject implements Drawable, JSONifiable, GameConstant
             myColor,
             SHAPE_ELLIPSE);
       setDoDie(doDie);
+      setDoesBounce(true);
    }
    public boolean[] getDoDie()
    {
@@ -77,6 +79,11 @@ class Ball extends PhysicalObject implements Drawable, JSONifiable, GameConstant
    public Ball draw()
    {
       super.draw();
+      return this;
+   }
+   public Ball setDoesBounce(boolean doesBounce)
+   {
+      super.setDoesBounce(doesBounce);
       return this;
    }
 }

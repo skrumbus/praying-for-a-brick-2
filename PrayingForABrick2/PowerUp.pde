@@ -44,6 +44,14 @@ class PowerUp extends PhysicalObject implements JSONifiable, GameConstants
             SHAPE_ELLIPSE);
       setPowerUpType(powerUpType);
       setState(state);
+      setDoesBounce(false);
+   }
+   public PowerUp()
+   {
+      super();
+      setPowerUpType(0);
+      setState(0);
+      setDoesBounce(false);
    }
    public int getPowerUpType()
    {
@@ -67,7 +75,8 @@ class PowerUp extends PhysicalObject implements JSONifiable, GameConstants
           (powerUpType != POWERDOWN_WEAKBALL) &&
           (powerUpType != POWERDOWN_SHORTPADDLE) )
          powerUpType = 0;
-      this.powerUpType = powerUpType;
+      else
+         this.powerUpType = powerUpType;
       return this;
    }
    public int getState()
@@ -92,6 +101,11 @@ class PowerUp extends PhysicalObject implements JSONifiable, GameConstants
       if(count < 1)
          count = 1;
       this.count = count;
+      return this;
+   }
+   public PowerUp setDoesBounce(boolean doesBounce)
+   {
+      super.setDoesBounce(doesBounce);
       return this;
    }
 }

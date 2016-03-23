@@ -4,6 +4,7 @@ class PhysicalObject implements Drawable, JSONifiable, GameConstants
    protected Size size;
    protected ColorSet myColor;
    protected int type; //0 = rect; 1 = circle;
+   protected boolean doesBounce;
    public JSONObject toJSON()
    {
       JSONObject obj = new JSONObject();
@@ -44,6 +45,7 @@ class PhysicalObject implements Drawable, JSONifiable, GameConstants
       setSize(new Size() );
       setColor(new ColorSet() );
       setType(0);
+      setDoesBounce(false);
    }
    public PhysicalObject(int type)
    {
@@ -51,6 +53,7 @@ class PhysicalObject implements Drawable, JSONifiable, GameConstants
       setSize(new Size() );
       setColor(new ColorSet() );
       setType(type);
+      setDoesBounce(false);
    }
    public PhysicalObject(MovingPosition position,
                          Size size,
@@ -61,6 +64,7 @@ class PhysicalObject implements Drawable, JSONifiable, GameConstants
       setSize(size);
       setColor(myColor);
       setType(type);
+      setDoesBounce(false);
    }
    public PhysicalObject(Position position, //stationary object
                          Size size,
@@ -71,6 +75,7 @@ class PhysicalObject implements Drawable, JSONifiable, GameConstants
       setSize(size);
       setColor(myColor);
       setType(type);
+      setDoesBounce(false);
    }
    public Size getSize()
    {
@@ -116,6 +121,15 @@ class PhysicalObject implements Drawable, JSONifiable, GameConstants
       else
          this.type = 0;
       return this;
+   }
+   public PhysicalObject setDoesBounce(boolean doesBounce)
+   {
+      this.doesBounce = doesBounce;
+      return this;
+   }
+   public boolean getDoesBounce()
+   {
+      return doesBounce;
    }
    public PhysicalObject draw()
    {

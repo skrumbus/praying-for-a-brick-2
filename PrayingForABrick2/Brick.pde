@@ -20,6 +20,7 @@ class Brick extends PhysicalObject implements Drawable, JSONifiable, GameConstan
                                blue(myColor.getPrimary() ), 
                                getAppropriateAlpha() ) );
       setColor(myColor);
+      setDoesBounce(true);
    }
    public Brick(Position position,
                 Size size,
@@ -40,11 +41,13 @@ class Brick extends PhysicalObject implements Drawable, JSONifiable, GameConstan
                                blue(myColor.getPrimary() ), 
                                getAppropriateAlpha() ) );
       setColor(myColor);
+      setDoesBounce(true);
    }
    public Brick()
    {
       super(SHAPE_RECT);
       setHealth(new Health(0) );
+      setDoesBounce(true);
    }
    public Health getHealth()
    {
@@ -105,6 +108,11 @@ class Brick extends PhysicalObject implements Drawable, JSONifiable, GameConstan
    }
    public Brick update()
    {
+      return this;
+   }
+   public Brick setDoesBounce(boolean doesBounce)
+   {
+      super.setDoesBounce(doesBounce);
       return this;
    }
    public Brick draw()

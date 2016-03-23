@@ -29,7 +29,7 @@ void setup()
          .setDeltas(0, 0)
          )
          .setSize(new Size(pWidth, pHeight) )
-         .setColor(new ColorSet(color(GameConstants.COLORS_SHADES[1], 160) ) ) 
+         .setColor(new ColorSet(color(#ff0000, 160) ) )
       )
       .setHud(new Hud())
       .setIsXLocked(false)
@@ -114,4 +114,3 @@ Vector<PhysicalObject> vectorizeObjects()
    vector.add(player.getPaddle() );
    return vector;
 }
-

@@ -77,6 +77,16 @@ class Paddle extends PhysicalObject implements Drawable, JSONifiable, GameConsta
       super.setColor(myColor);
       return this;
    }
+   public Paddle setType(int type)
+   {
+      super.setType(type);
+      return this;
+   }
+   public Paddle setDoesBounce(boolean doesBounce)
+   {
+      super.setDoesBounce(doesBounce);
+      return this;
+   }
    public Paddle draw()
    {
       super.draw();

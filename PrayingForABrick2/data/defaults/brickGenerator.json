@@ -8,7 +8,7 @@
     "this": "MovingPosition",
     "y": {
       "range": {
-        "min": 0,
+        "min": 50,
         "max": 150,
         "this": "Range"
       },
@@ -17,8 +17,8 @@
     },
     "x": {
       "range": {
-        "min": 0,
-        "max": 600,
+        "min": 200,
+        "max": 400,
         "this": "Range"
       },
       "delta": 42.85714340209961,
@@ -1708,7 +1708,7 @@
     ]
   ],
   "columns": 1,
-  "spacing": 5,
+  "spacing": 20,
   "this": "BrickGenerator",
-  "rows": 1
+  "rows": 2
 }
